@@ -1,0 +1,10 @@
+.Loginization-block {
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    width: 6em;
+    transform: translate(-50%, -50%)
+}
