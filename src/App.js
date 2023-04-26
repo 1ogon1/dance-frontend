@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { Login } from './components/auth/Login';
+import { JudgePage } from './components/judge/JudgePage'
+import { AdminAddUsers } from 'components/admin/AdminAddUsers';
+import { AdminPage } from 'components/admin/AdminPage';
+import { JudgeBattle } from 'components/judge/JudgeBattle';
+import { ScreenBattleProcess } from 'components/screen/ScreenBattleProcess';
+import { ScreenBattleResult } from 'components/screen/ScreenBattleResult';
+import { ScreenPage } from 'components/screen/ScreenPage';
+import { Table } from 'components/shared/Table';
+import React from 'react';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <Router>
+          <Routes>
+          {/* judge */}
+            <Route path='/judge' element={<JudgePage/>}>
+                <Route path='table' element={<Table/>}/>
+                <Route path='battle/:id/' element={<JudgeBattle/>}/>
+            </Route>
+          {/* screen */}
+            <Route path='/screen' element={<ScreenPage/>}>
+                <Route path='table' element={<Table/>}/>
+                <Route path='battle/:id/' element={<ScreenBattleProcess/>}/>
+                <Route path='result/:id/' element={<ScreenBattleResult/>}/>
+            </Route>
+          {/* admin */}
+            <Route path='/admin'  element={<AdminPage/>}>
+                <Route path='users' element={<AdminAddUsers/>}/>
+                <Route path='table' element={<Table/>}/>
+            </Route>
+          {/* auth */}
+            <Route path='/login' element={<Login/>}/>
+          </Routes>
+        </Router>
+    </>
   );
 }
 
