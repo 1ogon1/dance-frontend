@@ -23,12 +23,12 @@ export const Login = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Login:
+                    Login :
                     <input type="text" value={username} onChange={handleUsernameChange} />
                 </label>
                 <br />
                 <label>
-                    Password:
+                    Password :
                     <input type="password" value={password} onChange={handlePasswordChange} />
                 </label>
                 <br />
