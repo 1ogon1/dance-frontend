@@ -5,7 +5,7 @@ import { TableAdminBar } from "components/admin/TableAdminBar/TableAdminBar";
 import { users } from "./mock-data";
 export const TablePage = () => {
     //if screen => use different paddings(or container)
-    const [role, setRole] = useState("admin");
+    const [role, setRole] = useState("screen");
     //users that were inputed by admin
     const mockUsers = users;
 
@@ -13,17 +13,17 @@ export const TablePage = () => {
         return (
         <div className="small-container">
             <TableAdminBar users={mockUsers}/>
-            <Table />
+            <Table users={mockUsers}/>
         </div>
         )
     else if (role === "screen")
         return (
             <Container>
-                <Table />
+                <Table users={mockUsers}/>
             </Container>
         )
     else if (role === "judge")
-        return <Table/>
+        return <Table users={mockUsers}/>
 
 
 
