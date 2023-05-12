@@ -7,8 +7,8 @@ import { JudgeBattle } from 'components/judge/JudgeBattle';
 import { ScreenBattleProcess } from 'components/screen/ScreenBattleProcess';
 import { ScreenBattleResult } from 'components/screen/ScreenBattleResult';
 import { ScreenPage } from 'components/screen/ScreenPage';
-import { Table } from 'components/shared/Table';
 import React from 'react';
+import { TablePage } from 'components/shared/Table/TablePage';
 function App() {
   return (
     <>
@@ -16,19 +16,19 @@ function App() {
           <Routes>
           {/* judge */}
             <Route path='/judge' element={<JudgePage/>}>
-                <Route path='table' element={<Table/>}/>
+                <Route path='table' element={<TablePage/>}/>
                 <Route path='battle/:id/' element={<JudgeBattle/>}/>
             </Route>
           {/* screen */}
             <Route path='/screen' element={<ScreenPage/>}>
-                <Route path='table' element={<Table/>}/>
+                <Route path='table' element={<TablePage/>}/>
                 <Route path='battle/:id/' element={<ScreenBattleProcess/>}/>
                 <Route path='result/:id/' element={<ScreenBattleResult/>}/>
             </Route>
           {/* admin */}
             <Route path='/admin'  element={<AdminPage/>}>
                 <Route path='users' element={<AdminAddUsers/>}/>
-                <Route path='table' element={<Table/>}/>
+                <Route path='table' element={<TablePage/>}/>
             </Route>
           {/* auth */}
             <Route path='/login' element={<Login/>}/>
