@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import  'components/screen/ScreenStyle.css';
+import  'components/style/reset.css';
+import  'components/style/common.css';
 
 export const ScreenBattleProcess = () => {
     const [nickname1, setNickname1] = useState('Nickname1');
@@ -111,40 +114,51 @@ export const ScreenBattleProcess = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h2>{nickname1}</h2>
-            <h2>{nickname2}</h2>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ textAlign: 'center', marginRight: '50px' }}>
-                    <h3 onClick={handleTimer1Click} onBlur={handleTimer1Blur}>
-                        {isEditing1 ? (
-                            <input type="text" value={time1} onChange={handleTimer1Change} autoFocus />
-                        ) : (
-                            formatTime(timer1)
-                        )}
-                    </h3>
-                    {isRunning1 ? (
-                        <button onClick={stopTimer1}>Stop</button>
-                    ) : (
-                        <button onClick={startTimer1}>Go</button>
-                    )}
+        <div className='timer bg' >
+            <div className="timer__container ">
+
+                <div className='timer__header header-timer'>
+                     <div className='header-timer__logo'> </div>
+                     <div className='header-timer__final'>1/8 final</div>
                 </div>
-                <div style={{ textAlign: 'center', marginLeft: '50px' }}>
-                    <h3 onClick={handleTimer2Click} onBlur={handleTimer2Blur}>
-                        {isEditing2 ? (
-                            <input type="text" value={time2} onChange={handleTimer2Change} autoFocus />
-                        ) : (
-                            formatTime(timer2)
-                        )}
+                <div className='timer__content content'>
+
+                    <div className='content__column ' >
+                    <h2 className='content__column-name name-screen'>{nickname1}</h2>
+                    <h3 className='content__column__time' onClick={handleTimer1Click} onBlur={handleTimer1Blur}>
+                            {isEditing1 ? (
+                                <input className='content__column-input timer-input' type="text" value={time1} onChange={handleTimer1Change} autoFocus />
+                            ) : (
+                                formatTime(timer1)
+                            )}
                     </h3>
-                    {isRunning2 ? (
-                        <button onClick={stopTimer2}>Stop</button>
-                    ) : (
-                        <button onClick={startTimer2}>Go</button>
-                    )}
+                        {isRunning1 ? (
+                            <button className='content__column-stop btn btn--black' onClick={stopTimer1}>Stop</button>
+                        ) : (
+                            <button className='content__column-go btn btn--orange' onClick={startTimer1}>Go</button>
+                        )}
+                    </div>
+
+                    <div className='content__column'>
+                    <h2 className='content__column-name name-screen'>{nickname2}</h2>
+                        <h3 className='content__column__time' onClick={handleTimer2Click} onBlur={handleTimer2Blur}>
+                            {isEditing2 ? (
+                                <input className='content__column-input' type="text" value={time2} onChange={handleTimer2Change} autoFocus />
+                            ) : (
+                                formatTime(timer2)
+                            )}
+                        </h3>
+                        {isRunning2 ? (
+                            <button className='content__column-stop btn btn--black' onClick={stopTimer2}>Stop</button>
+                        ) : (
+                            <button className='content__column-go btn btn--orange' onClick={startTimer2}>Go</button>
+                        )}
+                    </div>
+
                 </div>
+
+                <div className='btt'><button className='timer__btn btn btn--orange'>RESULTS</button></div>
             </div>
-            <button>RESULTS</button>
         </div>
     );
 };
