@@ -5,7 +5,8 @@ import { TableAdminBar } from "components/admin/TableAdminBar/TableAdminBar";
 import { users } from "./mock-data";
 export const TablePage = () => {
     //if screen => use different paddings(or container)
-    const [role, setRole] = useState("screen");
+    //=> admin, screen, judge
+    const [role, setRole] = useState("admin");
     //users that were inputed by admin
     const mockUsers = users;
 
