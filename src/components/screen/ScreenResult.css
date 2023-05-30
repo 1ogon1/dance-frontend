@@ -1,0 +1,127 @@
+.result{
+   font-family: 'Inter', sans-serif;
+
+   background: linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%);
+height: 100vh;
+padding-top: 90px;
+padding-bottom: 50px;
+align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+
+   position: relative;
+}
+
+.result__container{
+padding-left: 15px;
+padding-right: 15px;
+width: 100%;
+max-width: 1444px;
+z-index: 2;
+text-align: center;
+}
+
+.result__header{
+   margin: 0 auto;
+   text-align: center;
+   color: #fff;
+   text-transform: uppercase;
+   font-weight: 700;
+   font-size: 32px;
+   line-height: 1.2;
+   max-width: 242px;
+   padding: 10px 32px;
+   background: #F85E01;
+   border-radius: 24px;
+   margin-bottom: 35px;
+}
+
+.result__main {
+
+ 
+}
+.main-result{
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   gap: 85px;
+
+   margin-bottom: 160px;
+}
+
+
+
+.main-result__logo{
+   display: block;
+   width: 327px;
+   height: 327px;
+   background: url(../style/logo-midle.png) no-repeat;
+   background-size: contain;
+
+   
+}
+
+
+.main-result__info{}
+.result-info{
+   flex: 0 1 58%;
+   
+}
+
+
+.result-info__row {
+   display: flex;
+   max-width: 668px;
+  align-items: center;
+   justify-content: space-between;
+   gap: 15px;
+   
+}
+.result-info__row:not(:last-child){
+margin-bottom: 42px;
+}
+.info-row{}
+
+
+.info-row__nickname{
+   max-width: 392px;
+
+   word-break:break-all ;
+}
+
+.info-row__input{
+   /* max-width: 174px; */
+   flex: 0 0 175px;
+   outline: none;
+text-align: center;
+   font-weight: 700;
+   font-size: 64px;
+   line-height: 1.2;
+   
+   color: #000000;
+background: #FFFFFF;
+box-shadow: inset 0px -4px 8px rgba(85, 85, 85, 0.25), inset 0px 6px 8px rgba(85, 85, 85, 0.25);
+border-radius: 48px;
+padding: 16px 52px;
+
+
+}
+
+.result__btn{
+display: inline-block;
+padding-right: 40px;
+
+}
+
+@media (max-width: 1024px)  { 
+   .main-result{
+justify-content: center;
+   }
+
+   .main-result__logo{
+display: none;
+   }
+}
