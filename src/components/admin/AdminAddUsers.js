@@ -1,45 +1,92 @@
-import React from "react"
-import { Container } from "components/shared/container/Container"
-import  'components/admin/AdminAddUsers.css';
-import  'components/style/reset.css';
-import  'components/style/common.css';
+import React, { useState } from "react";
+import { Container } from "components/shared/container/Container";
+import "components/admin/AdminAddUsers.css";
+import "components/style/reset.css";
+import "components/style/common.css";
+
 export const AdminAddUsers = () => {
+    const [userData, setUserData] = useState({
+        dancer1: "",
+        dancer2: "",
+        dancer3: "",
+        dancer4: "",
+        dancer5: "",
+        dancer6: "",
+        dancer7: "",
+        dancer8: "",
+        dancer9: "",
+        dancer10: "",
+        dancer11: "",
+        dancer12: "",
+        dancer13: "",
+        dancer14: "",
+        dancer15: "",
+        dancer16: "",
+    });
+
+    const handleChange = (e, fieldName) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            [fieldName]: e.target.value,
+        }));
+    };
+
+    const handleSave = () => {
+        console.log(userData);
+    };
+
     return (
         <div className="admin-top bg">
-            <Container >
-         
-                    <div className="admin-top__container">
-                        <h1 className="title">Top 16</h1>
-                        <div className="admin-top__columns">
-                            <div  className="admin-top__column top-column">
-                                {[...Array(6)].map((_, i) => (
-                                    <div className="top-column__block input-block" key={i}>
-                                        <label className="top-column__title input-title">{`Dancer ${i + 1}`}</label>
-                                        <input className="top-column__input input-info" type="text" />
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="admin-top__column top-column">
-                                {[...Array(6)].map((_, i) => (
-                                    <div className="top-column__block input-block" key={i + 6}>
-                                        <label className="top-column__title input-title">{`Dancer ${i + 7}`}</label>
-                                        <input className="top-column__input input-info" type="text"/>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="admin-top__column top-column">
-                                {[...Array(4)].map((_, i) => (
-                                    <div className="top-column__block input-block"  key={i + 12}>
-                                        <label className="top-column__title input-title">{`Dancer ${i + 13}`}</label>
-                                        <input className="top-column__input input-info" type="text"/>
-                                    </div>
-                                ))}
-                            </div>
+            <Container>
+                <div className="admin-top__container">
+                    <h1 className="title">Top 16</h1>
+                    <div className="admin-top__columns">
+                        <div className="admin-top__column top-column">
+                            {[...Array(6)].map((_, i) => (
+                                <div className="top-column__block input-block" key={i}>
+                                    <label className="top-column__title input-title">{`Dancer ${i + 1}`}</label>
+                                    <input
+                                        className="top-column__input input-info"
+                                        type="text"
+                                        value={userData[`dancer${i + 1}`]}
+                                        onChange={(e) => handleChange(e, `dancer${i + 1}`)}
+                                    />
+                                </div>
+                            ))}
                         </div>
-                        <button className="admin-top__btn btn btn--black">SAVE</button>
+                        <div className="admin-top__column top-column">
+                            {[...Array(6)].map((_, i) => (
+                                <div className="top-column__block input-block" key={i + 6}>
+                                    <label className="top-column__title input-title">{`Dancer ${i + 7}`}</label>
+                                    <input
+                                        className="top-column__input input-info"
+                                        type="text"
+                                        value={userData[`dancer${i + 7}`]}
+                                        onChange={(e) => handleChange(e, `dancer${i + 7}`)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                        <div className="admin-top__column top-column">
+                            {[...Array(4)].map((_, i) => (
+                                <div className="top-column__block input-block" key={i + 12}>
+                                    <label className="top-column__title input-title">{`Dancer ${i + 13}`}</label>
+                                    <input
+                                        className="top-column__input input-info"
+                                        type="text"
+                                        value={userData[`dancer${i + 13}`]}
+                                        onChange={(e) => handleChange(e, `dancer${i + 13}`)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="admin-top__logo"> </div>
+                    <button className="admin-top__btn btn btn--black" onClick={handleSave}>
+                        SAVE
+                    </button>
+                </div>
+                <div className="admin-top__logo"> </div>
             </Container>
         </div>
-    )
-}
+    );
+};
