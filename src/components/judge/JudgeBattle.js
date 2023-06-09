@@ -73,6 +73,7 @@ export const JudgeBattle = () => {
                     </div>
                     <div className="header-battle__number-battle">{battleNumber}</div>
                     <div className="header-battle__participant participant">
+
                         <div className="participant__name">{participant1Nickname}</div>
                         <div className="participant__name">{participant2Nickname}</div>
                     </div>

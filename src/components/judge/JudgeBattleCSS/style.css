@@ -6,7 +6,9 @@ background-color: #000000;
 }
 
 .battle__header {
-   background: linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%);   
+
+background: linear-gradient(270deg, #FD6001 0%, #000000 100%);
+   /* background: linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%);    */
       position: relative;
 }
 .header-battle {
@@ -20,13 +22,26 @@ background-color: #000000;
    line-height: 1.1;
       font-weight: 700;
 text-align: center;
+
+
+
+
  
+}
+.header-battle__container::before{
+   content: "";
+   position: absolute;
+   width: 384px;
+   height: 100vh;
+   top: -230px;
+   left: -130px;
+   background: url(../img/bg-small.svg) 0 0 no-repeat;
+   /* background-size: cover; */
 }
 
 
-
 .header-battle__logo {
-   background: 0 0 no-repeat;
+   background: url(/src/components/judge/img/logo-small.png) 0 0 no-repeat;
    width: 75px;
    height: 75px;
    text-align: center;
@@ -109,15 +124,19 @@ color: #FFFFFF;
 line-height: 1.1;
 letter-spacing: 2px;
 text-transform: uppercase;
+position: relative;
+z-index: 4;
+text-shadow:
+ 0 0 1.2px #FFFFFF,
+ 2px 4px 3px  #29282854,
+0 0 24px rgba(255, 153, 64, 0.2),
+0 0 2px  #520F00;
+color:#FE8A26;
 
-color: rgba(255, 146, 45, 0.7);
-/* text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;  */
-
-
-
-
+-webkit-text-stroke: 0.6px  rgba(242, 184, 92, 1); 
+text-stroke: 0.6px  rgba(242, 184, 92, 1); 
    }
-
+ 
 /* ================================================= */
 
 
@@ -176,8 +195,8 @@ justify-content: space-between;
 .main-battle__btn{
    text-align: center;
   width: 290px;
-  margin-top: 90px;
-
+  /* margin-top: 90px; */
+margin: 80px auto 15px;
  
 }
 
@@ -249,7 +268,8 @@ justify-content: space-between;
 
 
 .line--1 {
- 
+ left: 38.5px;
+
 }
 .line--1::before{
    content: "1";
@@ -261,7 +281,7 @@ justify-content: space-between;
 
 .line--2 {
    position: absolute;
-left: 66px;
+left: 68px;
 }
 .line--2::before{
    content: "2";
@@ -274,7 +294,7 @@ left: 66px;
 .line--3 {
    content: "ddd";
    position: absolute;
-   left: 95px;
+   left: 97px;
 }
 .line--3::before{
    content: "3";
@@ -286,7 +306,7 @@ left: 66px;
 
 .line--4 {
    position: absolute;
-   left: 125px;
+   left: 127px;
 }
 .line--4::before{
    content: "4";
