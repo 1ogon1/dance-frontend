@@ -1,0 +1,96 @@
+/* ---------BUTTON------ */
+.btn {
+    width: 100%;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(255, 219, 198, 0.25), inset 0px 0px 4px rgba(62, 23, 0, 0.65), inset 0px -4px 2px rgba(37, 14, 0, 0.65);
+    border-radius: 24px;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.btn--black {
+    background-color: #000000;
+    color: #F75E01;
+}
+
+.btn--orange {
+    background-color: rgba(247, 94, 1, 1);
+    color: #000000;
+}
+
+@media (min-width: 991.98px) {
+    .btn:hover {
+        opacity: 0.9;
+        transform: scale(1.1);
+
+    }
+}
+
+.btn:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+}
+
+/* =========================================================== */
+
+/* ---------INPUT FIELD(login block, admin block)-------------- */
+.input-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    max-width: 500px;
+}
+
+.input-title {
+    color: #fff;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+}
+
+.input-info {
+    width: 300px;
+    max-width: 100%;
+    padding: 10px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    outline: none;
+    transition:  box-shadow 0.3s ease 0s;
+}
+.input-info:focus{
+    box-shadow:  0px 0px 8px 2px rgb(8, 8, 8);
+
+}
+
+.bg{
+
+}
+
+.bg::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* top: 0;
+    right: 0; */
+
+    background: url(../style/bg.svg) no-repeat;
+    background-size: contain;
+    background-position: center right;
+    pointer-events: none;
+
+
+}
+@media (max-width: 1133px){
+    .bg::before{
+        /* height: 100%; */
+
+    }
+}

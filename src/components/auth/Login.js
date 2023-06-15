@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import './Login.css';
-import './auth_style/reset.css';
 import axios from "axios";
 
 
 export const Login = () => {
+    //TODO:
+    //отправить запрос, получить токен, перенаправить на страничку смотря какая роль
+
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 

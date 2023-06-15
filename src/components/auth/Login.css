@@ -1,5 +1,4 @@
 
-
 .auth {
    
     padding-right: 15px;
@@ -31,10 +30,10 @@ overflow: hidden;
     top: 0;
     left: 20%;
  
-    background: url(../auth/auth_style/decor-auth.svg) 0 0 / 100% no-repeat;
+    background: url(./decor-auth.svg) 0 0 / 100% no-repeat;
         background-size: cover;
     background-position: center right;
- pointer-events: none;
+    pointer-events: none;
  
     
  }
@@ -65,7 +64,7 @@ overflow: hidden;
     width: 208px;
     height: 208px;
     background-color: #fdb735;
-    background: url(../auth/auth_style/logo.png)  no-repeat;
+    background: url(./logo.png)  no-repeat;
     background-size: contain;
 
     
@@ -150,3 +149,71 @@ overflow: hidden;
   
   }
    }
+
+   *,
+*::before,
+*::after {
+   margin: 0;
+   padding: 0;
+   border: none;
+   box-sizing: border-box;
+  }
+
+li {
+   list-style: none;
+  }
+
+  img{
+   vertical-align: top;
+  }
+
+a {
+   color: inherit;
+  }
+
+a:link,
+a:visited {
+   text-decoration: none;   
+  }
+  
+a:hover {
+   text-decoration: none;
+ }
+
+ button{
+   cursor: pointer;
+   color: inherit;
+   background-color: inherit;
+ }
+
+ input,
+ button,
+ textarea{
+   font-family: inherit;
+   font-size: inherit;
+   font-weight: inherit;
+ }
+
+ input{
+   width: 100%;
+   
+ }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-weight: inherit;
+   font-size: inherit;
+  }
+
+  body{
+   line-height: 1;
+  }
+
+  html,
+  body{
+   height: 100%;
+  }
