@@ -4,6 +4,9 @@ import axios from "axios";
 
 
 export const Login = () => {
+    //TODO:
+    //отправить запрос, получить токен, перенаправить на страничку смотря какая роль
+
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -20,20 +23,25 @@ export const Login = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Login :
-                    <input type="text" value={username} onChange={handleUsernameChange} />
-                </label>
-                <br />
-                <label>
-                    Password :
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <button type="submit">Log In</button>
-            </form>
-        </div>
+        <div className="auth bg">
+                <div className="auth__main">
+                    <div className="auth__logo">
+                
+                    </div>
+                    <form className="auth__form" onSubmit={handleSubmit}>
+                        <label>
+                            <span className="auth__form-title">Login</span>
+                            <input type="text" value={username} onChange={handleUsernameChange} />
+                        </label>
+                        {/* <br /> */}
+                        <label>
+                            <span className="auth__form-title">Password </span>
+                            <input type="password" value={password} onChange={handlePasswordChange} />
+                        </label>
+                        {/* <br /> */}
+                        <button className="auth__form-btn" type="submit">Log In</button>
+                    </form>
+                </div>
+            </div>
     );
 }
