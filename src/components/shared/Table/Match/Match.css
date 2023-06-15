@@ -1,4 +1,4 @@
-.battle-block {
+/* .battle-block {
   max-width: 193px;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,6 @@ border-radius: 2px;
 }
 
 .top-line__img{
-  /* background: url(../img/material-symbols_edit.svg) 0 0 no-repeat; */
   width: 17px;
   height: 17px;
 }
@@ -92,4 +91,4 @@ border-radius: 2px;
 
   transform: translateY(-23px);
 
-}
+} */
