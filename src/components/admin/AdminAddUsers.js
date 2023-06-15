@@ -33,6 +33,7 @@ export const AdminAddUsers = () => {
 
     const handleSave = () => {
         console.log(userData);
+        // Отправка данных
     };
 
     return (
@@ -42,40 +43,40 @@ export const AdminAddUsers = () => {
                     <h1 className="title">Top 16</h1>
                     <div className="admin-top__columns">
                         <div className="admin-top__column top-column">
-                            {[...Array(6)].map((_, i) => (
+                            {Object.keys(userData).slice(0, 6).map((fieldName, i) => (
                                 <div className="top-column__block input-block" key={i}>
                                     <label className="top-column__title input-title">{`Dancer ${i + 1}`}</label>
                                     <input
                                         className="top-column__input input-info"
                                         type="text"
-                                        value={userData[`dancer${i + 1}`]}
-                                        onChange={(e) => handleChange(e, `dancer${i + 1}`)}
+                                        value={userData[fieldName]}
+                                        onChange={(e) => handleChange(e, fieldName)}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className="admin-top__column top-column">
-                            {[...Array(6)].map((_, i) => (
+                            {Object.keys(userData).slice(6, 12).map((fieldName, i) => (
                                 <div className="top-column__block input-block" key={i + 6}>
                                     <label className="top-column__title input-title">{`Dancer ${i + 7}`}</label>
                                     <input
                                         className="top-column__input input-info"
                                         type="text"
-                                        value={userData[`dancer${i + 7}`]}
-                                        onChange={(e) => handleChange(e, `dancer${i + 7}`)}
+                                        value={userData[fieldName]}
+                                        onChange={(e) => handleChange(e, fieldName)}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className="admin-top__column top-column">
-                            {[...Array(4)].map((_, i) => (
+                            {Object.keys(userData).slice(12, 16).map((fieldName, i) => (
                                 <div className="top-column__block input-block" key={i + 12}>
                                     <label className="top-column__title input-title">{`Dancer ${i + 13}`}</label>
                                     <input
                                         className="top-column__input input-info"
                                         type="text"
-                                        value={userData[`dancer${i + 13}`]}
-                                        onChange={(e) => handleChange(e, `dancer${i + 13}`)}
+                                        value={userData[fieldName]}
+                                        onChange={(e) => handleChange(e, fieldName)}
                                     />
                                 </div>
                             ))}
