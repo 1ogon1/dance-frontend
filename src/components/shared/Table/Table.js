@@ -17,13 +17,13 @@ export const Table = (props) => {
                 <h1 className="table__title">Battles</h1>
 
                 <ul className="column__final">
-                        <li>1/8 final</li>
-                        <li>1/4 final</li>
-                        <li>1/2 final</li>
-                        <li>Final</li>
-                    </ul>
+                    <li>1/8 final</li>
+                    <li>1/4 final</li>
+                    <li>1/2 final</li>
+                    <li>Final</li>
+                </ul>
                 <div className="table__main main-table">
-                 
+
 
                     {/* ===========================КОЛОНКА-1============================= */}
 
@@ -43,7 +43,6 @@ export const Table = (props) => {
                                             <div className="top-line__img"></div>
                                         </div>
                                     </div>
-
 
                                     <div className="top-block__line top-line">
                                         <span className="top-line__name">Maximus</span>
@@ -547,7 +546,7 @@ export const Table = (props) => {
                         </div>
                         {/* ============Внутри 2 компонента(END)========= */}
 
-             
+
 
                     </div>
                     {/* ===========================КОЛОНКА-4(END)============================= */}
@@ -556,7 +555,39 @@ export const Table = (props) => {
 
                 </div>
             </div>
-        </div>
+
+            {/*  =================MODAL-WINDOW===================== */ }
+                < div className="modal">
+
+                         <div className="window modal-active">
+                <div className="window__header header-window">
+                    <div className='header-window__final'>1/8 final</div>
+                    <div className='header-window__set'>Please set the timer </div>
+                </div>
+
+                <div className="window__columns column-wind">
+                    <div className="column-wind__left">
+                        <h2 className="column-wind__nick">Nickname1</h2>
+                        <div className="column-wind__input">
+                            <input type="text" />
+                        </div>
+                    </div>
+
+                    <div className="column-wind__right">
+                        <h2 className="column-wind__nick">Nickname2</h2>
+                        <div className="column-wind__input">
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="window__btn">
+                    <button className="btn btn--orange">save</button>
+                </div>
+                          </div>
+                 </div>
+                    {/* =================MODAL-WINDOW(END)===================== */ }
+        </div >
 
 
     )
