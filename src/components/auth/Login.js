@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './Login.css';
 import axios from "axios";
+import { postUserLogin } from "components/services/Login.service";
 
 
 export const Login = () => {
@@ -16,6 +17,17 @@ export const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         // Отправляем запрос на сервер с данными для входа
+        const user = {
+            nickName : username,
+            password: password
+        }
+        postUserLogin(user)
+        .then((r) => {
+            console.log(r)
+        })
+        .catch((e) => {
+            console.log(e)
+        })
         console.log(`Username: ${username}, Password: ${password}`);
         setUserName('');
         setPassword('');
