@@ -19,3 +19,14 @@ export const checkRole = (values) => {
     };
   return axios.get(`http://localhost:8800/api/users/me`, options)
 }   
+
+export const addParticipants = (values) => {
+  const options = {
+      headers: {
+        'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+        'Content-Type': 'application/json',
+      },
+    };
+  return axios.post(`http://localhost:8800/api/battles/addParticipants`, values, options)
+}
+

@@ -3,8 +3,11 @@ import { Container } from "components/shared/container/Container";
 import "components/admin/AdminAddUsers.css";
 import "components/style/reset.css";
 import "components/style/common.css";
+import { addParticipants } from "components/services/Requests";
+import { useNavigate } from "react-router-dom"; 
 
 export const AdminAddUsers = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         dancer1: "",
         dancer2: "",
@@ -32,8 +35,17 @@ export const AdminAddUsers = () => {
     };
 
     const handleSave = () => {
-        console.log(userData);
+       
         // Отправка данных
+        const dataToSend = Object.values(userData)
+        addParticipants(`{ "participants": ${JSON.stringify(dataToSend)}}`)
+        .then((r) => {
+            navigate(`/admin/table`);
+            console.log(r)
+        })
+        .catch((e) => {
+            console.log(e)
+        })
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './Login.css';
 import axios from "axios";
-import { postUserLogin, checkRole } from "components/services/Login.service";
+import { postUserLogin, checkRole } from "components/services/Requests";
 import { useNavigate } from "react-router-dom"; 
 
 export const Login = () => {
