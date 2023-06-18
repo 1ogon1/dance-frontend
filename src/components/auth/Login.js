@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 import './Login.css';
 import axios from "axios";
-import { postUserLogin } from "components/services/Login.service";
-
+import { postUserLogin, checkRole } from "components/services/Login.service";
+import { useNavigate } from "react-router-dom"; 
 
 export const Login = () => {
-    //TODO:
-    //отправить запрос, получить токен, перенаправить на страничку смотря какая роль
+    const navigate = useNavigate();
 
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -22,8 +21,21 @@ export const Login = () => {
             password: password
         }
         postUserLogin(user)
-        .then((r) => {
-            console.log(r)
+        .then((r) => {       
+            localStorage.setItem('Bearer', r.data.accessToken);
+            checkRole()
+            .then((r) => {
+                if (r.data.role === "ADMIN") {
+                    navigate(`/admin/users`);
+                } else if (r.data.role === "JUDGE") {
+                    navigate(`/judge/table`);
+                } else if (r.data.role === "SCREEN") {
+                    navigate(`/screen/table`);
+                }
+            })
+            .catch((e) => {
+                console.log(e)
+            })
         })
         .catch((e) => {
             console.log(e)

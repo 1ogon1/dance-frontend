@@ -9,3 +9,13 @@ export const postUserLogin = (values) => {
       };
     return axios.post(`http://localhost:8800/api/auth/login`, values, options)
 }   
+
+export const checkRole = (values) => {
+  const options = {
+      headers: {
+        'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+        'Content-Type': 'application/json',
+      },
+    };
+  return axios.get(`http://localhost:8800/api/users/me`, options)
+}   
