@@ -1,14 +1,33 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from 'react';
 import "./Table.css"
-
+import Popup from 'reactjs-popup';
 import "../style/common.css"
 import "../style/reset.css"
 import { matches } from "./mock-data";
 import { Brackets } from "./Brackets";
 export const Table = (props) => {
     const [role, setRole] = useState("admin")
+    const [timer1, setTimer1] = useState('01:00');
+    const [timer2, setTimer2] = useState('01:00');
 
+    const handleTimerChange = (event, timerNumber) => {
+        const value = event.target.value;
 
+        if (timerNumber === 1) {
+            setTimer1(value);
+        } else if (timerNumber === 2) {
+            setTimer2(value);
+        }
+    };
+
+    const handleSave = () => {
+        // Отправка данных таймеров на бэкэнд
+        sendDataToBackend(timer1, timer2);
+    };
+
+    const sendDataToBackend = (timerData1, timerData2) => {
+        //запросы
+    };
 
     return (
 
@@ -56,7 +75,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -85,70 +133,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-                        </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
 
-                        {/* ---------------------------------------------------- */}
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column1">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
 
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
                                         </div>
                                     </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <button className="battle-block__btn">Restart</button>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <button className="battle-block__btn">Restart</button>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
                         </div>
@@ -182,7 +196,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -211,7 +254,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
                         </div>
@@ -245,7 +317,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -274,7 +375,157 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
+                            </div>
+                            {/* ============ITEM(END)========= */}
+                        </div>
+                        {/* ============Внутри 2 компонента(END)========= */}
+
+                        {/* ---------------------------------------------------- */}
+                        {/* ============Внутри 2 компонента========= */}
+                        <div className="column__block block-column block-column1">
+                            {/* ============ITEM========= */}
+                            <div className="block-column__item">
+                                <div className="battle-block__top top-block">
+
+                                    <div className="top-block__line top-line">
+                                        <span className="top-line__name">Nickelodeon</span>
+                                        <div className="top-line__count">
+                                            <input className="top-line__number" type="number" />
+                                            <div className="top-line__img"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="top-block__line top-line">
+                                        <span className="top-line__name">Maximus</span>
+
+                                        <div className="top-line__count">
+                                            <input className="top-line__number" type="number" />
+                                            <div className="top-line__img"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
+                            </div>
+                            {/* ============ITEM(END)========= */}
+
+                            {/* ============ITEM========= */}
+                            <div className="block-column__item">
+                                <div className="battle-block__top top-block">
+
+                                    <div className="top-block__line top-line">
+                                        <span className="top-line__name">Nickelodeon</span>
+                                        <div className="top-line__count">
+                                            <input className="top-line__number" type="number" />
+                                            <div className="top-line__img"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="top-block__line top-line">
+                                        <span className="top-line__name">Maximus</span>
+
+                                        <div className="top-line__count">
+                                            <input className="top-line__number" type="number" />
+                                            <div className="top-line__img"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
                         </div>
@@ -324,7 +575,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -353,7 +633,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -382,7 +691,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -411,7 +749,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
                         </div>
@@ -464,7 +831,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -493,7 +889,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
                         </div>
@@ -539,7 +964,36 @@ export const Table = (props) => {
 
                                 </div>
 
-                                <button className="battle-block__btn">Restart</button>
+                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                    <div className="modal">
+                                        <div className="window modal-active">
+                                            <div className="window__header header-window">
+                                                <div className='header-window__final'>1/8 final</div>
+                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
+                                            </div>
+
+                                            <div className="window__columns column-wind">
+                                                <div className="column-wind__left">
+                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="column-wind__right">
+                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <div className="column-wind__input">
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="window__btn">
+                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Popup>
                             </div>
                             {/* ============ITEM(END)========= */}
 
@@ -557,36 +1011,8 @@ export const Table = (props) => {
             </div>
 
             {/*  =================MODAL-WINDOW===================== */ }
-                < div className="modal">
-
-                         <div className="window modal-active">
-                <div className="window__header header-window">
-                    <div className='header-window__final'>1/8 final</div>
-                    <div className='header-window__set'>Please set the timer </div>
-                </div>
-
-                <div className="window__columns column-wind">
-                    <div className="column-wind__left">
-                        <h2 className="column-wind__nick">Nickname1</h2>
-                        <div className="column-wind__input">
-                            <input type="text" />
-                        </div>
-                    </div>
-
-                    <div className="column-wind__right">
-                        <h2 className="column-wind__nick">Nickname2</h2>
-                        <div className="column-wind__input">
-                            <input type="text" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="window__btn">
-                    <button className="btn btn--orange">save</button>
-                </div>
-                          </div>
-                 </div>
-                    {/* =================MODAL-WINDOW(END)===================== */ }
+            {/*    <Modal/>*/}
+            {/* =================MODAL-WINDOW(END)===================== */ }
         </div >
 
 
