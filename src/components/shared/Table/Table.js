@@ -1010,9 +1010,7 @@ export const Table = (props) => {
                 </div>
             </div>
 
-            {/*  =================MODAL-WINDOW===================== */ }
-            {/*    <Modal/>*/}
-            {/* =================MODAL-WINDOW(END)===================== */ }
+  
         </div >
 
 
