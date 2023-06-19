@@ -11,7 +11,7 @@ import React from 'react';
 import { TablePage } from 'components/shared/Table/TablePage';
 function App() {
   return (
-    
+
     <>
         <Router>
           <Routes>
@@ -33,6 +33,7 @@ function App() {
             </Route>
           {/* auth */}
             <Route path='/login' element={<Login/>}/>
+            <Route path='*' element={<Login/>}/>
           </Routes>
         </Router>
     </>
