@@ -6,7 +6,7 @@ import { users } from "./mock-data";
 export const TablePage = () => {
     //if screen => use different paddings(or container)
     //=> admin, screen, judge
-    const [role, setRole] = useState("admin");
+    const [role, setRole] = useState("screen");
     //users that were inputed by admin
     const mockUsers = users;
 
