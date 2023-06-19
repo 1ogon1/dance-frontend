@@ -19,9 +19,9 @@ export const TablePage = () => {
         )
     else if (role === "screen")
         return (
-            <Container>
+            // <Container>
                 <Table users={mockUsers}/>
-            </Container>
+            // </Container>
         )
     else if (role === "judge")
         return <Table users={mockUsers}/>
