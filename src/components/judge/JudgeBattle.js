@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import 'components/style/common.css';
 import 'components/style/rest.css';
 import 'components/judge/JudgeBattleCSS/style.css';
-
+import { checkRole, getBattleById, vote } from 'components/services/requests';
+import { useEffect } from 'react';
 export const JudgeBattle = () => {
-    const [tournamentStage, setTournamentStage] = useState('Hip-Hop Pro 1/8 final');
-    const [judgeNickname, setJudgeNickname] = useState('Tolu');
-    const [battleNumber, setBattleNumber] = useState('Battle #1');
-    const [participant1Nickname, setParticipant1Nickname] = useState('BADABOOOM CHIKIBOOM');
-    const [participant2Nickname, setParticipant2Nickname] = useState('TIMOFEY');
+    const [battle, setBattle] = useState({})
+    const [judge, setJudge] = useState("")
+    const navigate = useNavigate();
 
+    const params = useParams()
+    useEffect(() => {
+        getBattleById(params.id)
+        .then((r) => {
+            setBattle(r.data)
+            console.log(r.data)
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+
+        checkRole()
+        .then((r) => {
+            setJudge(r.data)
+            console.log(r.data.name)
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+    }, [])
+    
     const [musicValue, setMusicValue] = useState(0);
     const [musicValue2, setMusicValue2] = useState(0);
     const [techniqueValue, setTechniqueValue] = useState(0);
@@ -21,39 +42,58 @@ export const JudgeBattle = () => {
     const [isOKClicked, setIsOKClicked] = useState(false);
 
     const handleMusicChange = (event) => {
-        setMusicValue(event.target.value);
+        setMusicValue((event.target.value));
     };
 
     const handleMusicChange2 = (event) => {
-        setMusicValue2(event.target.value);
+        setMusicValue2((event.target.value));
     };
 
     const handleTechniqueChange = (event) => {
-        setTechniqueValue(event.target.value);
+        setTechniqueValue((event.target.value));
     };
 
     const handleTechniqueChange2 = (event) => {
-        setTechniqueValue2(event.target.value);
+        setTechniqueValue2((event.target.value));
     };
 
     const handleOriginalityChange = (event) => {
-        setOriginalityValue(event.target.value);
+        setOriginalityValue((event.target.value));
     };
 
     const handleOriginalityChange2 = (event) => {
-        setOriginalityValue2(event.target.value);
+        setOriginalityValue2((event.target.value));
     };
 
     const handlePresentationChange = (event) => {
-        setPresentationValue(event.target.value);
+        setPresentationValue((event.target.value));
     };
 
     const handlePresentationChange2 = (event) => {
-        setPresentationValue2(event.target.value);
+        setPresentationValue2((event.target.value));
     };
 
     const handleOKClick = () => {
-        setIsOKClicked(true);
+        vote({
+            filing : Number(presentationValue),
+            technique: Number(techniqueValue),
+            musicality: Number(musicValue),
+            originality: Number(originalityValue)
+        }, battle._id, battle.participant_1._id)
+        .then((r) => {
+            console.log(r)
+            vote({
+                filing : Number(presentationValue2),
+                technique: Number(techniqueValue2),
+                musicality: Number(musicValue2),
+                originality: Number(originalityValue2)
+            }, battle._id, battle.participant_2._id)
+            .then((r) => {console.log(r)})
+            .catch((e) => console.log(e))
+        })
+        .catch((e) => console.log(e))
+        
+        navigate("../table")
     };
 
     return (
@@ -64,18 +104,18 @@ export const JudgeBattle = () => {
                     <div className="header-battle__info">
                         <div className="header-battle__left header-left">
                             <div className="header-left__round header-title">Round</div>
-                            <div className="header-left__nomination header-bottom">{tournamentStage}</div>
+                            <div className="header-left__nomination header-bottom">{battle.stage}</div>
                         </div>
                         <div className="header-battle__right header-right">
                             <div className="header-right__judge header-title">judge</div>
-                            <div className="header-right__nomination header-bottom">{judgeNickname}</div>
+                            <div className="header-right__nomination header-bottom">{judge.name}</div>
                         </div>
                     </div>
-                    <div className="header-battle__number-battle">{battleNumber}</div>
+                    <div className="header-battle__number-battle">Battle</div>
                     <div className="header-battle__participant participant">
 
-                        <div className="participant__name">{participant1Nickname}</div>
-                        <div className="participant__name">{participant2Nickname}</div>
+                        <div className="participant__name">{battle.participant_1 ? battle.participant_1.nickName : <>failed to load</>}</div>
+                        <div className="participant__name">{battle.participant_2 ? battle.participant_2.nickName : <>failed to load</>}</div>
                     </div>
                 </div>
             </div>

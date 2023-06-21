@@ -9,12 +9,20 @@ export const Table = (props) => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [isJudge, setIsJudge] = useState(true) //меня условие isJudge тут (true/false)
     const match = JSON.parse(`{
-        "_id": "6492a8360e21fa9cc15b4a3e",
+        "_id": "6492a8380e21fa9cc15b4a6b",
         "stage": "FINAL",
         "participant_1_total_score": 0,
         "participant_2_total_score": 0,
-        "participant_1": {},
-        "participant_2": {},
+        "participant_1": {
+            "_id": "6492a8380e21fa9cc15b4a6d",
+            "nickName": "6",
+            "phoenix_power": true
+        },
+        "participant_2": {
+            "_id": "6492a8380e21fa9cc15b4a6f",
+            "nickName": "7",
+            "phoenix_power": true
+        },
         "participant_1_score": [],
         "participant_2_score": []
     }`)

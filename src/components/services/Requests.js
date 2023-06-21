@@ -39,3 +39,23 @@ export const getParticipants = (values) => {
     };
   return axios.get(`http://localhost:8800/api/battles/participants`, options)
 }   
+
+export const getBattleById = (id) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return axios.get(`http://localhost:8800/api/battles/battle/${id}`, options)
+}
+
+export const vote = async (values, battleId, participantId) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return await axios.post(`http://localhost:8800/api/battles/vote/${battleId}/${participantId}`, values, options)
+}
