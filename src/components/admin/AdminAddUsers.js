@@ -3,7 +3,7 @@ import { Container } from "components/shared/container/Container";
 import "components/admin/AdminAddUsers.css";
 import "components/style/reset.css";
 import "components/style/common.css";
-import { addParticipants } from "components/services/Requests";
+import { addParticipants } from "components/services/requests";
 import { useNavigate } from "react-router-dom"; 
 
 export const AdminAddUsers = () => {

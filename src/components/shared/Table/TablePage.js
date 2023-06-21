@@ -22,8 +22,11 @@ export const TablePage = () => {
             <Table users={mockUsers}/>
         )
     else if (role === "judge")
-        return <Table users={mockUsers}/>
+        return (
+            // тут можно написать контейнер для свайпера
+            <Table users={mockUsers}/>
 
+        )
 
 
 
