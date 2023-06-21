@@ -104,18 +104,18 @@ export const JudgeBattle = () => {
                     <div className="header-battle__info">
                         <div className="header-battle__left header-left">
                             <div className="header-left__round header-title">Round</div>
-                            <div className="header-left__nomination header-bottom">{battle.stage}</div>
+                            <div className="header-left__nomination header-bottom">{battle.stage ? battle.stage : null}</div>
                         </div>
                         <div className="header-battle__right header-right">
                             <div className="header-right__judge header-title">judge</div>
-                            <div className="header-right__nomination header-bottom">{judge.name}</div>
+                            <div className="header-right__nomination header-bottom">{judge.name ? judge.name : null}</div>
                         </div>
                     </div>
                     <div className="header-battle__number-battle">Battle</div>
                     <div className="header-battle__participant participant">
 
-                        <div className="participant__name">{battle.participant_1 ? battle.participant_1.nickName : <>failed to load</>}</div>
-                        <div className="participant__name">{battle.participant_2 ? battle.participant_2.nickName : <>failed to load</>}</div>
+                        <div className="participant__name">{battle.participant_1 ? battle.participant_1.nickName : null}</div>
+                        <div className="participant__name">{battle.participant_2 ? battle.participant_2.nickName : null}</div>
                     </div>
                 </div>
             </div>
