@@ -3,8 +3,6 @@ import "./Table.css"
 import Popup from 'reactjs-popup';
 import "../style/common.css"
 import "../style/reset.css"
-import { matches } from "./mock-data";
-import { Brackets } from "./Brackets";
 export const Table = (props) => {
     const [role, setRole] = useState("admin")
     const [timer1, setTimer1] = useState('01:00');
