@@ -5,7 +5,7 @@ import "../style/common.css"
 import "../style/reset.css"
 import { Match } from './Match/Matсh';
 export const Table = (props) => {
-    const [role, setRole] = useState("admin")
+    const [role, setRole] = useState("SCREEN")
     const [isAdmin, setIsAdmin] = useState(false)
     const [isJudge, setIsJudge] = useState(true) //меня условие isJudge тут (true/false)
     return (
@@ -31,23 +31,23 @@ export const Table = (props) => {
                     {/* ===========================КОЛОНКА-1============================= */} 
                     <div className="main-table__column column--first ">
                         <div className="column__block block-column block-column1">
-                            <Match match={null}/>
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
                         </div>
 
                         <div className="column__block block-column block-column1">
-                          <Match match={null}/>
-                          <Match match={null}/>
+                          <Match match={null} role={role}/>
+                          <Match match={null} role={role}/>
                         </div>
 
                         <div className="column__block block-column block-column1">
-                            <Match match={null}/>
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
                         </div>
 
                         <div className="column__block block-column block-column1">
-                            <Match match={null}/>
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
                         </div>
                     </div>
                     {/* ===========================КОЛОНКА-1(END)============================= */}
@@ -62,10 +62,10 @@ export const Table = (props) => {
                     {/* ===========================КОЛОНКА-2============================= */}
                     <div className="main-table__column column ">
                         <div className="column__block block-column  block-column--2">
-                            <Match match={null}/>
-                            <Match match={null}/>
-                            <Match match={null}/>
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
                         </div>
                     </div>
                     {/* ===========================КОЛОНКА-2(END)============================= */}
@@ -78,8 +78,8 @@ export const Table = (props) => {
                     {/* ===========================КОЛОНКА-3============================= */}
                     <div className="main-table__column column column2">
                         <div className="column__block block-column block-column--2">
-                            <Match match={null}/>
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
+                            <Match match={null} role={role}/>
                         </div>
                     </div>
                     {/* ===========================КОЛОНКА-3(END)============================= */}
@@ -91,7 +91,7 @@ export const Table = (props) => {
                     {/* ===========================КОЛОНКА-4============================= */}
                     <div className="main-table__column column ">
                         <div className="column__block block-column block-column--final">
-                            <Match match={null}/>
+                            <Match match={null} role={role}/>
                         </div>
                     </div>
                     {/* ===========================КОЛОНКА-4(END)============================= */}

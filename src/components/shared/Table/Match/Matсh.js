@@ -4,7 +4,7 @@ import Popup from "reactjs-popup"
 export const Match = (props) => {
     const [timer1, setTimer1] = useState('01:00');
     const [timer2, setTimer2] = useState('01:00');
-
+    const isAdmin = (props.role === "ADMIN");
     const handleTimerChange = (event, timerNumber) => {
         const value = event.target.value;
 
@@ -31,8 +31,8 @@ export const Match = (props) => {
                                     <div className="top-block__line top-line">
                                         <span className="top-line__name">Nickelodeon</span>
                                         <div className="top-line__count">
-                                            <input className="top-line__number" type="number"/>
-                                            <div className="top-line__img"></div>
+                                            <input className="top-line__number" type="number" disabled={!isAdmin}/>
+                                            <div className="top-line__img" hidden={!isAdmin}></div>
                                         </div>
                                     </div>
 
@@ -40,14 +40,17 @@ export const Match = (props) => {
                                         <span className="top-line__name">Maximus</span>
 
                                         <div className="top-line__count">
-                                            <input className="top-line__number" type="number"/>
-                                            <div className="top-line__img"></div>
+                                            <input className="top-line__number" type="number" disabled={!isAdmin}/>
+                                            <div className="top-line__img" hidden={!isAdmin}></div>
                                         </div>
 
                                     </div>
 
                                 </div>
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                {
+                                    isAdmin
+                                   ?
+                                   <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
                                     <div className="modal">
                                         <div className="window modal-active">
                                             <div className="window__header header-window">
@@ -77,6 +80,10 @@ export const Match = (props) => {
                                         </div>
                                     </div>
                                 </Popup>
+                                   :
+                                    null
+                                }
+                                
                             </div>
     )
 }
