@@ -1,7 +1,9 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"
 
 export const Match = (props) => {
+    const navigate = useNavigate();
     const [timer1, setTimer1] = useState('01:00');
     const [timer2, setTimer2] = useState('01:00');
     const isAdmin = (props.role === "ADMIN");
@@ -26,7 +28,7 @@ export const Match = (props) => {
 
     return (
         <div className="block-column__item">
-                                <div className="battle-block__top top-block">
+                                <div className="battle-block__top top-block" onClick={()=> {if (props.role === "JUDGE" && props.match !== null) {navigate(`../..//judge/battle/${props.match._id}`)}}}>
 
                                     <div className="top-block__line top-line">
                                         <span className="top-line__name">Nickelodeon</span>

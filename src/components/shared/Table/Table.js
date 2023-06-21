@@ -5,9 +5,19 @@ import "../style/common.css"
 import "../style/reset.css"
 import { Match } from './Match/Matсh';
 export const Table = (props) => {
-    const [role, setRole] = useState("SCREEN")
+    const [role, setRole] = useState("JUDGE")
     const [isAdmin, setIsAdmin] = useState(false)
     const [isJudge, setIsJudge] = useState(true) //меня условие isJudge тут (true/false)
+    const match = JSON.parse(`{
+        "_id": "6492a8360e21fa9cc15b4a3e",
+        "stage": "FINAL",
+        "participant_1_total_score": 0,
+        "participant_2_total_score": 0,
+        "participant_1": {},
+        "participant_2": {},
+        "participant_1_score": [],
+        "participant_2_score": []
+    }`)
     return (
 
         <div className="table bgg">
@@ -31,7 +41,7 @@ export const Table = (props) => {
                     {/* ===========================КОЛОНКА-1============================= */} 
                     <div className="main-table__column column--first ">
                         <div className="column__block block-column block-column1">
-                            <Match match={null} role={role}/>
+                            <Match match={match} role={role}/>
                             <Match match={null} role={role}/>
                         </div>
 
