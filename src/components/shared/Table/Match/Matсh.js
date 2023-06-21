@@ -28,7 +28,14 @@ export const Match = (props) => {
 
     return (
         <div className="block-column__item">
-                                <div className="battle-block__top top-block" onClick={()=> {if (props.role === "JUDGE" && props.match !== null) {navigate(`../..//judge/battle/${props.match._id}`)}}}>
+                                <div className="battle-block__top top-block" onClick={()=> 
+                                {
+                                    if (props.role === "JUDGE" && props.match !== null)
+                                     navigate(`../..//judge/battle/${props.match._id}`)
+                                     else if (props.role === "SCREEN" && props.match !== null)
+                                     navigate(`../..//screen/battle/${props.match._id}`)
+                                }
+                                    }>
 
                                     <div className="top-block__line top-line">
                                         <span className="top-line__name">Nickelodeon</span>

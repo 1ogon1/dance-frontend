@@ -40,14 +40,14 @@ export const getParticipants = (values) => {
   return axios.get(`http://localhost:8800/api/battles/participants`, options)
 }   
 
-export const getBattleById = (id) => {
+export const getBattleById =async (id) => {
   const options = {
     headers: {
       'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
       'Content-Type': 'application/json',
     },
   };
-  return axios.get(`http://localhost:8800/api/battles/battle/${id}`, options)
+  return await axios.get(`http://localhost:8800/api/battles/battle/${id}`, options)
 }
 
 export const vote = async (values, battleId, participantId) => {
