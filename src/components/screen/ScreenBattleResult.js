@@ -167,7 +167,7 @@ export const ScreenBattleResult = () => {
      {/* -----------Блок: total--------- */}
      <div className="section__total total">
         <h2 className="total__text">Total:</h2>
-        <input className="total__result" type="text" placeholder="Score 1" value={score1} onChange={handleScoreChange1} />
+        <input className="total__result" type="text" placeholder="Score 1" value={score2} onChange={handleScoreChange2} />
         </div>
 </div>
 
