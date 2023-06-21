@@ -30,3 +30,12 @@ export const addParticipants = (values) => {
   return axios.post(`http://localhost:8800/api/battles/addParticipants`, values, options)
 }
 
+export const getParticipants = (values) => {
+  const options = {
+      headers: {
+        'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+        'Content-Type': 'application/json',
+      },
+    };
+  return axios.get(`http://localhost:8800/api/battles/participants`, options)
+}   
