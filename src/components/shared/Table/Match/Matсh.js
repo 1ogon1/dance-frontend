@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"
 
@@ -17,14 +17,58 @@ export const Match = (props) => {
         }
     };
 
-    const sendDataToBackend = (timerData1, timerData2) => {
-        //запросы
+
+  
+    //debouncing
+    //preventing useEffect on mount
+    const mounted = useRef(false)
+
+    const [inputValue1, setInputValue1] = useState(props.match ? props.match.participant_1_total_score : "-")
+    const [currentId1, setCurrentId1] = useState("234erw")
+
+    const [inputValue2, setInputValue2] = useState(props.match ? props.match.participant_2_total_score : "-")
+    const [currentId2, setCurrentId2] = useState("1qwe2@")
+
+   
+   
+    const onSavePointsHandler1 = (e) => {
+        setCurrentId1(e.target.id)
+        setInputValue1(e.target.value);
     };
 
-    const handleSave = () => {
-        // Отправка данных таймеров на бэкэнд
-        sendDataToBackend(timer1, timer2);
+    const onSavePointsHandler2 = (e) => {
+        setCurrentId2(e.target.id)
+        setInputValue2(e.target.value);
     };
+
+     useEffect(() => {
+        if (mounted.current) {
+            const delayInputTimeoutId = setTimeout(() => {
+                console.log("value: %d", inputValue1)
+                console.log("id: %s", currentId1)
+                setCurrentId1("")
+              }, 500);
+              return () => clearTimeout(delayInputTimeoutId);
+        }
+      }, [inputValue1, 1000]);
+    
+      useEffect(() => {
+        if (mounted.current) {
+            const delayInputTimeoutId = setTimeout(() => {
+                console.log("value: %d", inputValue2)
+                console.log("id: %s", currentId2)
+                setCurrentId2("")
+              }, 500);
+              return () => clearTimeout(delayInputTimeoutId);
+        }
+      }, [inputValue2, 1000]);
+    
+      useEffect(() => {
+        mounted.current = true
+        return () => {
+          mounted.current = false
+        }
+      }, [])
 
     return (
         <div className="block-column__item">
@@ -38,18 +82,18 @@ export const Match = (props) => {
                                     }>
 
                                     <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
+                                        <span className="top-line__name">{props.match ? props.match.participant_1.nickName : null}</span>
                                         <div className="top-line__count">
-                                            <input className="top-line__number" type="number" disabled={!isAdmin}/>
+                                            <input className="top-line__number" id={props.match ? props.match.participant_1._id : null} type="number" disabled={!isAdmin} value={inputValue1} onChange={onSavePointsHandler1}/>
                                             <div className="top-line__img" hidden={!isAdmin}></div>
                                         </div>
                                     </div>
 
                                     <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
+                                        <span className="top-line__name">{props.match ? props.match.participant_2.nickName : null}</span>
 
                                         <div className="top-line__count">
-                                            <input className="top-line__number" type="number" disabled={!isAdmin}/>
+                                            <input className="top-line__number" id={props.match ? props.match.participant_2._id : null} type="number"  disabled={!isAdmin} value={inputValue2} onChange={onSavePointsHandler2}/>
                                             <div className="top-line__img" hidden={!isAdmin}></div>
                                         </div>
 
@@ -84,7 +128,7 @@ export const Match = (props) => {
                                             </div>
 
                                             <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
+                                                <button className="btn btn--orange">SAVE</button>
                                             </div>
                                         </div>
                                     </div>

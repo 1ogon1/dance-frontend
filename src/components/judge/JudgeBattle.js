@@ -74,25 +74,27 @@ export const JudgeBattle = () => {
     };
 
     const handleOKClick = () => {
-        vote({
-            filing : Number(presentationValue),
-            technique: Number(techniqueValue),
-            musicality: Number(musicValue),
-            originality: Number(originalityValue)
-        }, battle._id, battle.participant_1._id)
-        .then((r) => {
-            console.log(r)
+
+        if (battle._id) {
             vote({
-                filing : Number(presentationValue2),
-                technique: Number(techniqueValue2),
-                musicality: Number(musicValue2),
-                originality: Number(originalityValue2)
-            }, battle._id, battle.participant_2._id)
-            .then((r) => {console.log(r)})
+                filing : Number(presentationValue),
+                technique: Number(techniqueValue),
+                musicality: Number(musicValue),
+                originality: Number(originalityValue)
+            }, battle._id, battle.participant_1._id)
+            .then((r) => {
+                console.log(r)
+                vote({
+                    filing : Number(presentationValue2),
+                    technique: Number(techniqueValue2),
+                    musicality: Number(musicValue2),
+                    originality: Number(originalityValue2)
+                }, battle._id, battle.participant_2._id)
+                .then((r) => {console.log(r)})
+                .catch((e) => console.log(e))
+            })
             .catch((e) => console.log(e))
-        })
-        .catch((e) => console.log(e))
-        
+        }  
         navigate("../table")
     };
 
