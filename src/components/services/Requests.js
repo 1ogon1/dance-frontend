@@ -1,5 +1,5 @@
 import axios from "axios"
-//import of env file and replase baseURL
+const baseUrl = "http://localhost:8800/api"
 
 export const postUserLogin = (values) => {
     const options = {
@@ -7,7 +7,7 @@ export const postUserLogin = (values) => {
           'Content-Type': 'application/json',
         },
       };
-    return axios.post(`http://localhost:8800/api/auth/login`, values, options)
+    return axios.post(`${baseUrl}/auth/login`, values, options)
 }   
 
 export const checkRole = (values) => {
@@ -17,7 +17,7 @@ export const checkRole = (values) => {
         'Content-Type': 'application/json',
       },
     };
-  return axios.get(`http://localhost:8800/api/users/me`, options)
+  return axios.get(`${baseUrl}/users/me`, options)
 }   
 
 export const addParticipants = (values) => {
@@ -27,7 +27,7 @@ export const addParticipants = (values) => {
         'Content-Type': 'application/json',
       },
     };
-  return axios.post(`http://localhost:8800/api/battles/addParticipants`, values, options)
+  return axios.post(`${baseUrl}/battles/addParticipants`, values, options)
 }
 
 export const getParticipants = (values) => {
@@ -37,7 +37,7 @@ export const getParticipants = (values) => {
         'Content-Type': 'application/json',
       },
     };
-  return axios.get(`http://localhost:8800/api/battles/participants`, options)
+  return axios.get(`${baseUrl}/battles/participants`, options)
 }   
 
 export const getBattleById =async (id) => {
@@ -47,7 +47,7 @@ export const getBattleById =async (id) => {
       'Content-Type': 'application/json',
     },
   };
-  return await axios.get(`http://localhost:8800/api/battles/battle/${id}`, options)
+  return await axios.get(`${baseUrl}/battles/battle/${id}`, options)
 }
 
 export const vote = async (values, battleId, participantId) => {
@@ -57,7 +57,7 @@ export const vote = async (values, battleId, participantId) => {
       'Content-Type': 'application/json',
     },
   };
-  return await axios.post(`http://localhost:8800/api/battles/vote/${battleId}/${participantId}`, values, options)
+  return await axios.post(`${baseUrl}/battles/vote/${battleId}/${participantId}`, values, options)
 }
 
 export const phoenixPower = async (participantId) => {
@@ -67,6 +67,5 @@ export const phoenixPower = async (participantId) => {
       'Content-Type': 'application/json',
     },
   };
-  console.log(`http://localhost:8800/api/battles/activatePhoenix/` + JSON.parse(participantId))
-  return await axios.post(`http://localhost:8800/api/battles/activatePhoenix/` + JSON.parse(participantId), options, options)
+  return await axios.post(`${baseUrl}/battles/activatePhoenix/` + JSON.parse(participantId), options, options)
 }
