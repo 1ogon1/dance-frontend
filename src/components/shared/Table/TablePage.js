@@ -6,25 +6,25 @@ import { users } from "./mock-data";
 export const TablePage = () => {
     //if screen => use different paddings(or container)
     //=> admin, screen, judge
-    const [role, setRole] = useState("screen");
+    const [role, setRole] = useState("JUDGE");
     //users that were inputed by admin
     const mockUsers = users;
 
-    if (role === "admin")
+    if (role === "ADMIN")
         return (
         <div className="small-container">
             <TableAdminBar users={mockUsers}/>
-            <Table users={mockUsers}/>
+            <Table users={mockUsers} role={role}/>
         </div>
         )
-    else if (role === "screen")
+    else if (role === "SCREEN")
         return (
-            <Table users={mockUsers}/>
+            <Table users={mockUsers} role={role}/>
         )
-    else if (role === "judge")
+    else if (role === "JUDGE")
         return (
             // тут можно написать контейнер для свайпера
-            <Table users={mockUsers}/>
+            <Table users={mockUsers} role={role}/>
 
         )
 
