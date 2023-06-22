@@ -10,8 +10,8 @@ export const Table = (props) => {
     const match = JSON.parse(`{
         "_id": "6492a8380e21fa9cc15b4a6b",
         "stage": "FINAL",
-        "participant_1_total_score": 0,
-        "participant_2_total_score": 0,
+        "participant_1_total_score": 50,
+        "participant_2_total_score": 10,
         "participant_1": {
             "_id": "6492a8380e21fa9cc15b4a6d",
             "nickName": "6",

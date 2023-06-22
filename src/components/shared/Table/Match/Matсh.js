@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"
 
 export const Match = (props) => {
+
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+
     const navigate = useNavigate();
     const [timer1, setTimer1] = useState('01:00');
     const [timer2, setTimer2] = useState('01:00');
@@ -17,58 +21,17 @@ export const Match = (props) => {
         }
     };
 
+    const onClickMakeWinnerHandler = (e) => {
+        console.log(e.target.id)
+    }
 
-  
-    //debouncing
-    //preventing useEffect on mount
-    const mounted = useRef(false)
-
-    const [inputValue1, setInputValue1] = useState(props.match ? props.match.participant_1_total_score : "-")
-    const [currentId1, setCurrentId1] = useState("234erw")
-
-    const [inputValue2, setInputValue2] = useState(props.match ? props.match.participant_2_total_score : "-")
-    const [currentId2, setCurrentId2] = useState("1qwe2@")
-
-   
-   
-    const onSavePointsHandler1 = (e) => {
-        setCurrentId1(e.target.id)
-        setInputValue1(e.target.value);
-    };
-
-    const onSavePointsHandler2 = (e) => {
-        setCurrentId2(e.target.id)
-        setInputValue2(e.target.value);
-    };
-
-     useEffect(() => {
-        if (mounted.current) {
-            const delayInputTimeoutId = setTimeout(() => {
-                console.log("value: %d", inputValue1)
-                console.log("id: %s", currentId1)
-                setCurrentId1("")
-              }, 500);
-              return () => clearTimeout(delayInputTimeoutId);
-        }
-      }, [inputValue1, 1000]);
-    
-      useEffect(() => {
-        if (mounted.current) {
-            const delayInputTimeoutId = setTimeout(() => {
-                console.log("value: %d", inputValue2)
-                console.log("id: %s", currentId2)
-                setCurrentId2("")
-              }, 500);
-              return () => clearTimeout(delayInputTimeoutId);
-        }
-      }, [inputValue2, 1000]);
-    
-      useEffect(() => {
-        mounted.current = true
-        return () => {
-          mounted.current = false
-        }
-      }, [])
+    const onClickResetPointsAndTime = (e) => {
+        setOpen(!open)
+        console.log(timer1)
+        console.log(props.match.participant_1._id)
+        console.log(timer2)
+        console.log(props.match.participant_2._id)
+    }
 
     return (
         <div className="block-column__item">
@@ -84,8 +47,8 @@ export const Match = (props) => {
                                     <div className="top-block__line top-line">
                                         <span className="top-line__name">{props.match ? props.match.participant_1.nickName : null}</span>
                                         <div className="top-line__count">
-                                            <input className="top-line__number" id={props.match ? props.match.participant_1._id : null} type="number" disabled={!isAdmin} value={inputValue1} onChange={onSavePointsHandler1}/>
-                                            <div className="top-line__img" hidden={!isAdmin}></div>
+                                            <input className="top-line__number"  type="number" value={props.match ? props.match.participant_1_total_score : 0} disabled={true} />
+                                            <div className="top-line__img" hidden={!isAdmin}  id={props.match ? props.match.participant_1._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
                                     </div>
 
@@ -93,8 +56,8 @@ export const Match = (props) => {
                                         <span className="top-line__name">{props.match ? props.match.participant_2.nickName : null}</span>
 
                                         <div className="top-line__count">
-                                            <input className="top-line__number" id={props.match ? props.match.participant_2._id : null} type="number"  disabled={!isAdmin} value={inputValue2} onChange={onSavePointsHandler2}/>
-                                            <div className="top-line__img" hidden={!isAdmin}></div>
+                                            <input className="top-line__number" type="number" value={props.match ? props.match.participant_2_total_score : 0}  disabled={true} />
+                                            <div className="top-line__img" hidden={!isAdmin} id={props.match ? props.match.participant_2._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
 
                                     </div>
@@ -103,7 +66,9 @@ export const Match = (props) => {
                                 {
                                     isAdmin
                                    ?
-                                   <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
+                                   <>
+                                   <button className="battle-block__btn" onClick={() => setOpen(o => !o)}>Restart</button>
+                                   <Popup open={open} closeOnDocumentClick onClose={closeModal}>
                                     <div className="modal" tabIndex="1" >
                                         <div className="window modal-active">
                                             <div className="window__header header-window">
@@ -113,14 +78,14 @@ export const Match = (props) => {
 
                                             <div className="window__columns column-wind">
                                                 <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
+                                                    <h2 className="column-wind__nick">{props.match ? props.match.participant_1.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} tabIndex="1"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
+                                                    <h2 className="column-wind__nick">{props.match ? props.match.participant_2.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} tabIndex="2" />
                                                     </div>
@@ -128,11 +93,12 @@ export const Match = (props) => {
                                             </div>
 
                                             <div className="window__btn">
-                                                <button className="btn btn--orange">SAVE</button>
+                                                <button className="btn btn--orange" onClick={onClickResetPointsAndTime}>SAVE</button>
                                             </div>
                                         </div>
                                     </div>
                                 </Popup>
+                                </>
                                    :
                                     null
                                 }
