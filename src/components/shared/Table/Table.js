@@ -5,7 +5,7 @@ import "../style/common.css"
 import "../style/reset.css"
 import { Match } from './Match/Matсh';
 export const Table = (props) => {
-    const [role, setRole] = useState("JUDGE")
+    const [role, setRole] = useState("ADMIN") 
     const [isAdmin, setIsAdmin] = useState(false)
     const [isJudge, setIsJudge] = useState(true) //меня условие isJudge тут (true/false)
     const match = JSON.parse(`{

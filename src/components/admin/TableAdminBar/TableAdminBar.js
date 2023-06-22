@@ -20,7 +20,12 @@ export const TableAdminBar = (props) => {
             <div className="sidebar__logo"></div>
             <h2 className="sidebar__title">Top 16</h2>
                {participants.map((e) => <>{
-               <div className="sidebar__list" id={e.id}>{e.nickName}</div>
+               <div className="sidebar__box">
+                  <div className="sidebar__list" id={e.id}>{e.nickName}</div>
+                  <button className="sidebar__img"> </button>
+
+               </div>
+              
             }</>)}
        
               {/* <div className="sidebar__btn btn btn--orange">randomize</div> */}

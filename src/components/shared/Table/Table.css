@@ -266,7 +266,7 @@ background-size: contain;
 
   /* height: 100vh; */
   display: flex;
- transform: translateX(25%);
+ /* transform: translateX(25%); */
 /* justify-content: center; */
 align-items: center;
 padding-left: 15px;
@@ -343,14 +343,25 @@ text-align: center;
   border-radius: 32px;
 
 }
+
+.column-wind__input input:focus{
+  outline: none;
+box-shadow: 0px 0px 15px 3px #FD6001;
+  border-radius: 32px;
+  
+}
 .column-wind__right {
   flex: 0 1 250px;
 }
 .window__btn {
-  display: flex;
-  justify-content: center;
-
+margin: 0 auto;
+  width: 300px;
 }
+
+.window__btn div:focus{
+  outline: 2px solid #bd0404;
+}
+
 .btn {
   padding: 10px 121px;
   font-weight: 800;
