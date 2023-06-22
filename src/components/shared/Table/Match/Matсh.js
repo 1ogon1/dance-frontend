@@ -104,7 +104,7 @@ export const Match = (props) => {
                                     isAdmin
                                    ?
                                    <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
+                                    <div className="modal" tabIndex="1" >
                                         <div className="window modal-active">
                                             <div className="window__header header-window">
                                                 <div className='header-window__final'>1/8 final</div>
@@ -115,14 +115,14 @@ export const Match = (props) => {
                                                 <div className="column-wind__left">
                                                     <h2 className="column-wind__nick">Nickname1</h2>
                                                     <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
+                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} tabIndex="1"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="column-wind__right">
                                                     <h2 className="column-wind__nick">Nickname2</h2>
                                                     <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
+                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} tabIndex="2" />
                                                     </div>
                                                 </div>
                                             </div>
