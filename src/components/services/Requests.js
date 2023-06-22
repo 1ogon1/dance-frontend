@@ -59,3 +59,14 @@ export const vote = async (values, battleId, participantId) => {
   };
   return await axios.post(`http://localhost:8800/api/battles/vote/${battleId}/${participantId}`, values, options)
 }
+
+export const phoenixPower = async (participantId) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  console.log(`http://localhost:8800/api/battles/activatePhoenix/` + JSON.parse(participantId))
+  return await axios.post(`http://localhost:8800/api/battles/activatePhoenix/` + JSON.parse(participantId), options, options)
+}
