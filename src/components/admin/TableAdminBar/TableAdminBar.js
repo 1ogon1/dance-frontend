@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "./TableAdminBar.css"
 import { getParticipants, phoenixPower } from "components/services/requests";
+import { useNavigate } from "react-router-dom";
 export const TableAdminBar = (props) => {
    const [participants, setParticipants] = useState([]);
+
+   const navigate = useNavigate()
+
    useEffect(() => {
       getParticipants()
          .then((r) => {
@@ -10,6 +14,7 @@ export const TableAdminBar = (props) => {
          })
          .catch((e) => {
             console.log(e)
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
             setParticipants(props.users)
          })
    }, [])
@@ -26,6 +31,7 @@ export const TableAdminBar = (props) => {
                   })
                   .catch((e) => {
                      console.log(e)
+                     if (e.response.status === 401 || e.response.status === 403) navigate("/")
                      setParticipants(props.users)
                   })
             })

@@ -28,16 +28,16 @@ export const Match = (props) => {
             participantId:`${e.target.id}`
         }
         if (e.target.id && props.match._id) {
-            //reload
             setWinner(body, props.match._id)
             .then((r) => {
+                window.location.reload();
                 console.log(r)
             })
             .catch((e) => {
+                if (e.response.status === 401 || e.response.status === 403) navigate("/")
                 console.log(e)
             })
         }
-        console.log(e.target.id)
     }
 
     
@@ -52,9 +52,11 @@ export const Match = (props) => {
             //reload
             resetBattle(body, props.match._id)
             .then((r) => {
+                window.location.reload();
                 console.log(r)
             })
             .catch((e) => {
+                if (e.response.status === 401 || e.response.status === 403) navigate("/")
                 console.log(e)
             })
             

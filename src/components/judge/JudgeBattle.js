@@ -18,6 +18,7 @@ export const JudgeBattle = () => {
             console.log(r.data)
         })
         .catch((e) => {
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
             console.log(e)
         })
 
@@ -27,6 +28,7 @@ export const JudgeBattle = () => {
             console.log(r.data.name)
         })
         .catch((e) => {
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
             console.log(e)
         })
     }, [])
@@ -93,7 +95,10 @@ export const JudgeBattle = () => {
                 .then((r) => {console.log(r)})
                 .catch((e) => console.log(e))
             })
-            .catch((e) => console.log(e))
+            .catch((e) => {
+                console.log(e)
+                if (e.response.status === 401 || e.response.status === 403) navigate("/")
+            } )
         }  
         navigate("../table")
     };

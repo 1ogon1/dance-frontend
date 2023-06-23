@@ -28,6 +28,7 @@ export const ScreenBattleProcess = () => {
             setTimer2(r.data.participant_2_timer)
         })
         .catch((e) => {
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
             console.log(e)
         })
     }, [])

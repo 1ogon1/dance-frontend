@@ -23,6 +23,7 @@ export const ScreenBattleResult = () => {
         console.log(r.data)
       })
       .catch((e) => {
+        if (e.response.status === 401 || e.response.status === 403) navigate("/")
         console.log(e)
       })
   }, [])

@@ -9,13 +9,14 @@ import { Match } from './Match/Matсh';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { getBattlesEvent } from 'components/services/requests';
+import { useNavigate } from 'react-router-dom';
 // --------swiper(END)---------
 
 export const Table = (props) => {
     const [role, setRole] = useState(props.role)
     const [isJudge, setIsJudge] = useState(role === "JUDGE") //меня условие isJudge тут (true/false)
     const [event, setEvent] = useState({});
-
+    const navigate = useNavigate()
     const [data, setData] = useState(Object.is(event, {}) ? null : event)
     useEffect(() => {
 
@@ -32,6 +33,7 @@ export const Table = (props) => {
                 })
                 .catch((e) => {
                     console.log(e)
+                    if (e.response.status === 401 || e.response.status === 403) navigate("/")
                 })
             setInterval(() => {
                 getBattlesEvent()
