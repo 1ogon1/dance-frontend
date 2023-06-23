@@ -1,3 +1,4 @@
+import { setWinner } from "components/services/requests";
 import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"
@@ -22,6 +23,18 @@ export const Match = (props) => {
     };
 
     const onClickMakeWinnerHandler = (e) => {
+        const body = {
+            participantId:`${e.target.id}`
+        }
+        if (e.target.id && props.match._id) {
+            setWinner(body, props.match._id)
+            .then((r) => {
+                console.log(r)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+        }
         console.log(e.target.id)
     }
 
@@ -33,6 +46,7 @@ export const Match = (props) => {
         console.log(props.match.participant_2._id)
     }
 
+   
     return (
         <div className="block-column__item">
                                 <div className="battle-block__top top-block" onClick={()=> 
@@ -45,19 +59,19 @@ export const Match = (props) => {
                                     }>
 
                                     <div className="top-block__line top-line">
-                                        <span className="top-line__name">{props.match ? props.match.participant_1.nickName : null}</span>
+                                        <span className="top-line__name">{props.match && props.match.participant_1.nickName ? props.match.participant_1.nickName : null}</span>
                                         <div className="top-line__count">
                                             <input className="top-line__number"  type="number" value={props.match ? props.match.participant_1_total_score : 0} disabled={true} />
-                                            <div className="top-line__img" hidden={!isAdmin}  id={props.match ? props.match.participant_1._id : null} onClick={onClickMakeWinnerHandler}></div>
+                                            <div className="top-line__img" hidden={!isAdmin}  id={props.match && props.match.participant_1._id ? props.match.participant_1._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
                                     </div>
 
                                     <div className="top-block__line top-line">
-                                        <span className="top-line__name">{props.match ? props.match.participant_2.nickName : null}</span>
+                                        <span className="top-line__name">{props.match && props.match.participant_2.nickName ? props.match.participant_2.nickName : null}</span>
 
                                         <div className="top-line__count">
                                             <input className="top-line__number" type="number" value={props.match ? props.match.participant_2_total_score : 0}  disabled={true} />
-                                            <div className="top-line__img" hidden={!isAdmin} id={props.match ? props.match.participant_2._id : null} onClick={onClickMakeWinnerHandler}></div>
+                                            <div className="top-line__img" hidden={!isAdmin} id={props.match && props.match.participant_2._id ? props.match.participant_2._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
 
                                     </div>
@@ -78,14 +92,14 @@ export const Match = (props) => {
 
                                             <div className="window__columns column-wind">
                                                 <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">{props.match ? props.match.participant_1.nickName : null}</h2>
+                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_1.nickName ? props.match.participant_1.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} tabIndex="1"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">{props.match ? props.match.participant_2.nickName : null}</h2>
+                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_2.nickName ? props.match.participant_2.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} tabIndex="2" />
                                                     </div>

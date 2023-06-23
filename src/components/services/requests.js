@@ -69,3 +69,23 @@ export const phoenixPower = async (participantId) => {
   };
   return await axios.post(`${baseUrl}/battles/activatePhoenix/` + JSON.parse(participantId), options, options)
 }
+
+export const getBattlesEvent =async () => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return await axios.get(`${baseUrl}/battles/event`, options)
+}
+
+export const setWinner = async (values, battleId) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return await axios.post(`${baseUrl}/battles/setWinner/` + battleId, JSON.stringify(values), options)
+}
