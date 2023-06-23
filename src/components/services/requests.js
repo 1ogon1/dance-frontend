@@ -89,3 +89,13 @@ export const setWinner = async (values, battleId) => {
   };
   return await axios.post(`${baseUrl}/battles/setWinner/` + battleId, JSON.stringify(values), options)
 }
+
+export const resetBattle = async (values, battleId) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return await axios.post(`${baseUrl}/battles/reset/` + battleId, JSON.stringify(values), options)
+}

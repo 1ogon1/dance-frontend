@@ -1,16 +1,27 @@
-import { setWinner } from "components/services/requests";
+import { resetBattle, setWinner } from "components/services/requests";
 import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"
 
 export const Match = (props) => {
 
+
+    function secondsToHMS(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        var remainingSeconds = seconds % 60;
+        
+        var minutesStr = minutes < 10 ? "0" + minutes : minutes.toString();
+        var secondsStr = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.toString();
+        
+        return minutesStr + ":" + secondsStr;
+      }
+
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
 
     const navigate = useNavigate();
-    const [timer1, setTimer1] = useState('01:00');
-    const [timer2, setTimer2] = useState('01:00');
+    const [timer1, setTimer1] = useState(props.match ? secondsToHMS(props.match.participant_1_timer) : "01:00");
+    const [timer2, setTimer2] = useState(props.match ? secondsToHMS(props.match.participant_2_timer) : "01:00");
     const isAdmin = (props.role === "ADMIN");
     const handleTimerChange = (event, timerNumber) => {
         const value = event.target.value;
@@ -38,15 +49,34 @@ export const Match = (props) => {
         console.log(e.target.id)
     }
 
+    function hmsToSecondsOnly(str) {
+        var p = str.split(':'),
+            s = 0, m = 1;
+    
+        while (p.length > 0) {
+            s += m * parseInt(p.pop(), 10);
+            m *= 60;
+        }
+    
+        return s;
+    }
+
     const onClickResetPointsAndTime = (e) => {
         setOpen(!open)
         if (props.match) {
-            console.log(timer1)
-            console.log(props.match.participant_1._id)
-            console.log(timer2)
-            console.log(props.match.participant_2._id)
+            const body = {
+                participant_1_time: hmsToSecondsOnly(timer1),
+                participant_2_time: hmsToSecondsOnly(timer2)
+            }
+            resetBattle(body, props.match._id)
+            .then((r) => {
+                console.log(r)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+            
         }
-      
     }
 
    
