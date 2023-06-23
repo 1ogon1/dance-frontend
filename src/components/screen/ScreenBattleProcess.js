@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import  'components/screen/ScreenStyle.css';
 import  'components/style/reset.css';
 import  'components/style/common.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getBattleById } from 'components/services/requests';
 
 export const ScreenBattleProcess = () => {
-    const [nickname1, setNickname1] = useState('Nickname1');
-    const [nickname2, setNickname2] = useState('Nickname2');
+
+    const navigate = useNavigate()
+    const [battle, setBattle] = useState({})
+
     const [time1, setTime1] = useState('01:00');
     const [time2, setTime2] = useState('01:00');
     const [timer1, setTimer1] = useState(0);
@@ -14,6 +18,20 @@ export const ScreenBattleProcess = () => {
     const [isRunning2, setIsRunning2] = useState(false);
     const [isEditing1, setIsEditing1] = useState(false);
     const [isEditing2, setIsEditing2] = useState(false);
+
+    const params = useParams()
+    useEffect(() => {
+        getBattleById(params.id)
+        .then((r) => {
+            setBattle(r.data)
+            setTimer1(r.data.participant_1_timer)
+            setTimer2(r.data.participant_2_timer)
+        })
+        .catch((e) => {
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
+            console.log(e)
+        })
+    }, [])
 
     useEffect(() => {
         setTimer1(convertTimeToSeconds(time1));
@@ -113,18 +131,22 @@ export const ScreenBattleProcess = () => {
         return parseInt(minutes) * 60 + parseInt(seconds);
     };
 
+    const onClickHandler = () => {
+        navigate(`../result/${params.id}`)
+    }
+
     return (
         <div className='timer bg' >
             <div className="timer__container ">
 
                 <div className='timer__header header-timer'>
                      <div className='header-timer__logo'> </div>
-                     <div className='header-timer__final'>1/8 final</div>
+                     <div className='header-timer__final'>{battle ? battle.stage : null}</div>
                 </div>
                 <div className='timer__content content'>
 
                     <div className='content__column ' >
-                    <h2 className='content__column-name name-screen'>{nickname1}</h2>
+                    <h2 className='content__column-name name-screen'>{battle.participant_1 ? battle.participant_1.nickName : null}</h2>
                     <h3 className='content__column__time' onClick={handleTimer1Click} onBlur={handleTimer1Blur}>
                             {isEditing1 ? (
                                 <input className='content__column-input timer-input' type="text" value={time1} onChange={handleTimer1Change} autoFocus />
@@ -140,7 +162,7 @@ export const ScreenBattleProcess = () => {
                     </div>
 
                     <div className='content__column'>
-                    <h2 className='content__column-name name-screen'>{nickname2}</h2>
+                    <h2 className='content__column-name name-screen'>{battle.participant_2 ? battle.participant_2.nickName : null}</h2>
                         <h3 className='content__column__time' onClick={handleTimer2Click} onBlur={handleTimer2Blur}>
                             {isEditing2 ? (
                                 <input className='content__column-input' type="text" value={time2} onChange={handleTimer2Change} autoFocus />
@@ -157,7 +179,7 @@ export const ScreenBattleProcess = () => {
 
                 </div>
 
-                <div className='btt'><button className='timer__btn btn btn--orange'>RESULTS</button></div>
+                <div className='btt'><button className='timer__btn btn btn--orange' onClick={onClickHandler}>RESULTS</button></div>
             </div>
         </div>
     );

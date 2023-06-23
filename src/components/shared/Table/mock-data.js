@@ -1,67 +1,67 @@
 export const users = [
     {
         id : "1",
-        name : "user1"
+        nickName : "user1"
     },
     {
         id : "2",
-        name : "user2"
+        nickName : "user2"
     },
     {
         id : "3",
-        name : "user3"
+        nickName : "user3"
     },
     {
         id : "4",
-        name : "user4"
+        nickName : "user4"
     },
     {
         id : "5",
-        name : "user5"
+        nickName : "user5"
     },
     {
         id : "6",
-        name : "user6"
+        nickName : "user6"
     },
     {
         id : "7",
-        name : "user7"
+        nickName : "user7"
     },
     {
         id : "2",
-        name : "user8"
+        nickName : "user8"
     },
     {
         id : "3",
-        name : "user9"
+        nickName : "user9"
     },
     {
         id : "1",
-        name : "user10"
+        nickName : "user10"
     },
     {
         id : "2",
-        name : "user11"
+        nickName : "user11"
     },
     {
         id : "3",
-        name : "user12"
+        nickName : "user12"
     },
     {
         id : "1",
-        name : "user13"
+        nickName : "user13"
     },
     {
         id : "2",
-        name : "user14"
+        nickName : "user14"
     },
     {
         id : "3",
-        name : "user15"
+        nickName : "user15"
     },
     {
         id : "3",
-        name : "user16"
+        nickName : "user16"
     },
 
 ]
@@ -69,10 +69,10 @@ export const users = [
 export const matches = [
         {
         id : 1,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 9,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -81,7 +81,7 @@ export const matches = [
                 resultText : 5,
                 isWinner : false,
                 status : null,
-                name : "TestTeam1234",
+                nickName : "TestTeam1234",
                 picture : null
             },
             {
@@ -89,7 +89,7 @@ export const matches = [
                 resultText : 15,
                 isWinner : false,
                 status : null,
-                name : "TestTeam1234",
+                nickName : "TestTeam1234",
                 picture : null
             }
 
@@ -97,10 +97,10 @@ export const matches = [
     } ,
     {
         id : 2,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 9,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -108,10 +108,10 @@ export const matches = [
     },
     {
         id : 3,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 10,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -119,10 +119,10 @@ export const matches = [
     },
     {
         id : 4,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 10,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -130,10 +130,10 @@ export const matches = [
     },
     {
         id : 5,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 11,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -141,10 +141,10 @@ export const matches = [
     },
     {
         id : 6,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 11,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -152,20 +152,20 @@ export const matches = [
     },
     {
         id : 7,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 12,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
         ]
     },{
         id : 8,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 12,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -173,10 +173,10 @@ export const matches = [
     },
     {
         id : 9,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 13,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -184,10 +184,10 @@ export const matches = [
     },
     {
         id : 10,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 13,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -195,10 +195,10 @@ export const matches = [
     },
     {
         id : 11,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 14,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -206,10 +206,10 @@ export const matches = [
     },
     {
         id : 12,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 14,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -217,10 +217,10 @@ export const matches = [
     },
     {
         id : 13,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 15,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -228,10 +228,10 @@ export const matches = [
     },
     {
         id : 14,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : 15,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [
@@ -239,10 +239,10 @@ export const matches = [
     },
     {
         id : 15,
-        name : "Final - Match",
+        nickName : "Final - Match",
         nextMatchId : null,
         nextLooserMatchId : null,
-        tournamentRoundText : "6",
+        tournickNamentRoundText : "6",
         startTime : "2021-05-30",
         state : "DONE",
         participants : [

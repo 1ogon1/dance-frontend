@@ -3,7 +3,7 @@ import { Container } from "components/shared/container/Container";
 import "components/admin/AdminAddUsers.css";
 import "components/style/reset.css";
 import "components/style/common.css";
-import { addParticipants } from "components/services/Requests";
+import { addParticipants } from "components/services/requests";
 import { useNavigate } from "react-router-dom"; 
 
 export const AdminAddUsers = () => {
@@ -44,6 +44,7 @@ export const AdminAddUsers = () => {
             console.log(r)
         })
         .catch((e) => {
+            if (e.response.status === 401 || e.response.status === 403) navigate("/")
             console.log(e)
         })
     };

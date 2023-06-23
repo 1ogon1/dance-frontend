@@ -3,1016 +3,231 @@ import "./Table.css"
 import Popup from 'reactjs-popup';
 import "../style/common.css"
 import "../style/reset.css"
-import { matches } from "./mock-data";
-import { Brackets } from "./Brackets";
+import { Match } from './Match/Matсh';
+
+// --------swiper---------
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { getBattlesEvent } from 'components/services/requests';
+import { useNavigate } from 'react-router-dom';
+// --------swiper(END)---------
+
 export const Table = (props) => {
-    const [role, setRole] = useState("admin")
-    const [timer1, setTimer1] = useState('01:00');
-    const [timer2, setTimer2] = useState('01:00');
+    const [role, setRole] = useState(props.role)
+    const [isJudge, setIsJudge] = useState(role === "JUDGE") //меня условие isJudge тут (true/false)
+    const [event, setEvent] = useState({});
+    const navigate = useNavigate()
+    const [data, setData] = useState(Object.is(event, {}) ? null : event)
+    useEffect(() => {
 
-    const handleTimerChange = (event, timerNumber) => {
-        const value = event.target.value;
-
-        if (timerNumber === 1) {
-            setTimer1(value);
-        } else if (timerNumber === 2) {
-            setTimer2(value);
+        let cachedData = localStorage.getItem('cachedData')
+        if (cachedData) {
+            setEvent(JSON.parse(cachedData))
         }
-    };
 
-    const handleSave = () => {
-        // Отправка данных таймеров на бэкэнд
-        sendDataToBackend(timer1, timer2);
-    };
+        getBattlesEvent()
+                .then((r) => {
+                    setEvent(r.data)
+                    localStorage.setItem('cachedData', JSON.stringify(r.data));
+                    console.log(r.data)
+                })
+                .catch((e) => {
+                    console.log(e)
+                    if (e.response.status === 401 || e.response.status === 403) navigate("/")
+                })
+            // setInterval(() => {
+            //     getBattlesEvent()
+            //     .then((r) => {
+            //         setEvent(r.data)
+            //         console.log(r.data)
+            //     })
+            //     .catch((e) => {
+            //         console.log(e)
+            //     })
+            // }, 15000);
+    }, [])
 
-    const sendDataToBackend = (timerData1, timerData2) => {
-        //запросы
-    };
+    
 
     return (
-
         <div className="table bgg">
             <div className="table__container">
                 <h1 className="table__title">Battles</h1>
+                {isJudge ?
+                    <Swiper
+                        spaceBetween={10}
+                        slidesPerView={2}
+                        slidesPerGroup={2}
+                        className="table__main main-table">
+                        {/* ===========================КОЛОНКА-1============================= */}
+                        <SwiperSlide>
+                            <div className="main-table__column column--first ">
 
-                <ul className="column__final">
-                    <li>1/8 final</li>
-                    <li>1/4 final</li>
-                    <li>1/2 final</li>
-                    <li>Final</li>
-                </ul>
-                <div className="table__main main-table">
-
-
-                    {/* ===========================КОЛОНКА-1============================= */}
-
-                    <div className="main-table__column column--first ">
-
-
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column1">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
+                                <div className='text'>1/8 final</div>
+                                <div className="column__block block-column block-column1">
+                                    <Match match={event.battles ? event.battles[14] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[13] : null} role={role} />
                                 </div>
 
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
+                                <div className="column__block block-column block-column1">
+                                    <Match match={event.battles ? event.battles[12] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[11] : null} role={role} />
                                 </div>
 
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
+                                <div className="column__block block-column block-column1">
+                                    <Match match={event.battles ? event.battles[10] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[9] : null} role={role} />
+                                </div>
 
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
+                                <div className="column__block block-column block-column1">
+                                    <Match match={event.battles ? event.battles[8] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[7] : null} role={role} />
+                                </div>
                             </div>
-                            {/* ============ITEM(END)========= */}
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-1(END)============================= */}
+                        <SwiperSlide>
+                            <div className="main-table__column column column--connect connect-mob--first">
+                                <div className="column__line line--mob"></div>
+                                <div className="column__line line--mob"></div>
+                                <div className="column__line line--mob"></div>
+                                <div className="column__line line--mob"></div>
+                            </div>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-2============================= */}
+
+                        <SwiperSlide>
+                            <div className="main-table__column column ">
+                                <div className='text'>1/4 final</div>
+                                <div className="column__block block-column  block-column--2 column-mob--second">
+                                    <Match match={event.battles ? event.battles[3] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[4] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[5] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[6] : null} role={role} />
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-2(END)============================= */}
+
+                        <SwiperSlide>
+                            <div className="main-table__column  column--connect connect-mob--second">
+                                <div className="column__line line--midle line--mob"></div>
+                                <div className="column__line line--midle line--mob"></div>
+                            </div>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-3============================= */}
+                        <SwiperSlide>
+                            <div className="main-table__column column column2">
+                                <div className='text'>1/2 final</div>
+                                <div className="column__block block-column block-column--3 column-mob--third">
+                                    <Match match={event.battles ? event.battles[2] : null} role={role} />
+                                    <Match match={event.battles ? event.battles[1] : null} role={role} />
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-3(END)============================= */}
+                        <SwiperSlide>
+                            <div className="main-table__column column column--connect connect-mob--third">
+                                <div className="column__line line--big line--mob"></div>
+                            </div>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-4============================= */}
+                        <SwiperSlide>
+                            <div className="main-table__column column column-mob--final">
+                                <div className='text'>Final</div>
+                                <div className="column__block block-column block-column--final">
+                                    <Match match={event.battles ? event.battles[0] : null} role={role} />
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                        </SwiperSlide>
+                        {/* ===========================КОЛОНКА-4(END)============================= */}
+                    </Swiper>
+
+
+
+
+                    //  =============================
+                    : <div className="table__main main-table">
+                        {/* ===========================КОЛОНКА-1============================= */}
+                        <div className="main-table__column column--first ">
+
+                            <div className='text'>1/8 final</div>
+                            <div className="column__block block-column block-column1">
+                                <Match match={event.battles ? event.battles[14] : null} role={role} />
+                                <Match match={event.battles ? event.battles[13] : null} role={role} />
+                            </div>
+
+                            <div className="column__block block-column block-column1">
+                                <Match match={event.battles ? event.battles[12] : null} role={role} />
+                                <Match match={event.battles ? event.battles[11] : null} role={role} />
+                            </div>
+
+                            <div className="column__block block-column block-column1">
+                                <Match match={event.battles ? event.battles[10] : null} role={role} />
+                                <Match match={event.battles ? event.battles[9] : null} role={role} />
+                            </div>
+
+                            <div className="column__block block-column block-column1">
+                                <Match match={event.battles ? event.battles[8] : null} role={role} />
+                                <Match match={event.battles ? event.battles[7] : null} role={role} />
+                            </div>
                         </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
-
-                        {/* ---------------------------------------------------- */}
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column1">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-                        </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
-
-                        {/* ---------------------------------------------------- */}
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column1">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-                        </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
-
-                        {/* ---------------------------------------------------- */}
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column1">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-                        </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
-
-                    </div>
-                    {/* ===========================КОЛОНКА-1(END)============================= */}
-
-                    <div className="main-table__column column column--connect">
-                        <div className="column__line"></div>
-                        <div className="column__line"></div>
-                        <div className="column__line"></div>
-                        <div className="column__line"></div>
-                    </div>
-
-
-
-                    {/* ===========================КОЛОНКА-2============================= */}
-
-                    <div className="main-table__column column ">
-
-
-                        {/* ============Внутри 4 компонента========= */}
-                        <div className="column__block block-column  block-column--2">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
-
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
+                        {/* ===========================КОЛОНКА-1(END)============================= */}
+
+                        <div className="main-table__column column column--connect">
+                            <div className="column__line"></div>
+                            <div className="column__line"></div>
+                            <div className="column__line"></div>
+                            <div className="column__line"></div>
                         </div>
 
-
-
-
-
-
-                    </div>
-                    {/* ===========================КОЛОНКА-2(END)============================= */}
-
-                    <div className="main-table__column  column--connect">
-                        <div className="column__line line--midle"></div>
-                        <div className="column__line line--midle"></div>
-                    </div>
-
-
-
-
-                    {/* ===========================КОЛОНКА-3============================= */}
-
-                    <div className="main-table__column column column2">
-
-
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column--2">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
+                        {/* ===========================КОЛОНКА-2============================= */}
+                        <div className="main-table__column column ">
+                            <div className='text'>1/4 final</div>
+                            <div className="column__block block-column  block-column--2">
+                                <Match match={event.battles ? event.battles[3] : null} role={role} />
+                                <Match match={event.battles ? event.battles[4] : null} role={role} />
+                                <Match match={event.battles ? event.battles[5] : null} role={role} />
+                                <Match match={event.battles ? event.battles[6] : null} role={role} />
                             </div>
-                            {/* ============ITEM(END)========= */}
+                        </div>
+                        {/* ===========================КОЛОНКА-2(END)============================= */}
 
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
-                            </div>
-                            {/* ============ITEM(END)========= */}
+                        <div className="main-table__column  column--connect">
+                            <div className="column__line line--midle"></div>
+                            <div className="column__line line--midle"></div>
                         </div>
 
-                    </div>
-                    {/* ===========================КОЛОНКА-3(END)============================= */}
+                        {/* ===========================КОЛОНКА-3============================= */}
 
-                    <div className="main-table__column column column--connect">
-                        <div className="column__line line--big"></div>
-                    </div>
-
-
-
-                    {/* ===========================КОЛОНКА-4============================= */}
-
-                    <div className="main-table__column column ">
-
-
-                        {/* ============Внутри 2 компонента========= */}
-                        <div className="column__block block-column block-column--final">
-                            {/* ============ITEM========= */}
-                            <div className="block-column__item">
-                                <div className="battle-block__top top-block">
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Nickelodeon</span>
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="top-block__line top-line">
-                                        <span className="top-line__name">Maximus</span>
-
-                                        <div className="top-line__count">
-                                            <input className="top-line__number" type="number" />
-                                            <div className="top-line__img"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <Popup trigger={<button className="battle-block__btn">Restart</button>} modal>
-                                    <div className="modal">
-                                        <div className="window modal-active">
-                                            <div className="window__header header-window">
-                                                <div className='header-window__final'>1/8 final</div>
-                                                <div className='header-window__set'>PLEASE SET THE TIMER</div>
-                                            </div>
-
-                                            <div className="window__columns column-wind">
-                                                <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">Nickname1</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">Nickname2</h2>
-                                                    <div className="column-wind__input">
-                                                        <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="window__btn">
-                                                <button className="btn btn--orange" onClick={handleSave}>SAVE</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Popup>
+                        <div className="main-table__column column column2">
+                            <div className='text'>1/2 final</div>
+                            <div className="column__block block-column block-column--3">
+                            <Match match={event.battles ? event.battles[2] : null} role={role} />
+                            <Match match={event.battles ? event.battles[1] : null} role={role} />
                             </div>
-                            {/* ============ITEM(END)========= */}
-
                         </div>
-                        {/* ============Внутри 2 компонента(END)========= */}
+                        {/* ===========================КОЛОНКА-3(END)============================= */}
+
+                        <div className="main-table__column column column--connect">
+                            <div className="column__line line--big"></div>
+                        </div>
+
+                        {/* ===========================КОЛОНКА-4============================= */}
+                        <div className="main-table__column column ">
+                            <div className='text'>Final</div>
+                            <div className="column__block block-column block-column--final">
+                            <Match match={event.battles ? event.battles[0] : null} role={role} />
+                            </div>
+                        </div>
+                        {/* ===========================КОЛОНКА-4(END)============================= */}
+                    </div>}
+                {/*  */}
 
 
-
-                    </div>
-                    {/* ===========================КОЛОНКА-4(END)============================= */}
-
-
-
-                </div>
             </div>
-
-  
-        </div >
-
-
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './Login.css';
 import axios from "axios";
-import { postUserLogin, checkRole } from "components/services/Requests";
+import { postUserLogin, checkRole } from "components/services/requests";
 import { useNavigate } from "react-router-dom"; 
 
 export const Login = () => {
@@ -25,6 +25,7 @@ export const Login = () => {
             localStorage.setItem('Bearer', r.data.accessToken);
             checkRole()
             .then((r) => {
+                localStorage.setItem('role', r.data.role);
                 if (r.data.role === "ADMIN") {
                     navigate(`/admin/users`);
                 } else if (r.data.role === "JUDGE") {
