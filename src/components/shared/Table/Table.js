@@ -15,16 +15,37 @@ export const Table = (props) => {
     const [role, setRole] = useState(props.role)
     const [isJudge, setIsJudge] = useState(role === "JUDGE") //меня условие isJudge тут (true/false)
     const [event, setEvent] = useState({});
+
+    const [data, setData] = useState(Object.is(event, {}) ? null : event)
     useEffect(() => {
+
+        let cachedData = localStorage.getItem('cachedData')
+        if (cachedData) {
+            setEvent(JSON.parse(cachedData))
+        }
+
         getBattlesEvent()
-            .then((r) => {
-                setEvent(r.data)
-                console.log(r.data)
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+                .then((r) => {
+                    setEvent(r.data)
+                    localStorage.setItem('cachedData', JSON.stringify(r.data));
+                    console.log(r.data)
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+            setInterval(() => {
+                getBattlesEvent()
+                .then((r) => {
+                    setEvent(r.data)
+                    console.log(r.data)
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+            }, 15000);
     }, [])
+
+    
 
     return (
         <div className="table bgg">

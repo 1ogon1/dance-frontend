@@ -25,6 +25,7 @@ export const Login = () => {
             localStorage.setItem('Bearer', r.data.accessToken);
             checkRole()
             .then((r) => {
+                localStorage.setItem('role', r.data.role);
                 if (r.data.role === "ADMIN") {
                     navigate(`/admin/users`);
                 } else if (r.data.role === "JUDGE") {

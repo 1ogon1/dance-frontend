@@ -24,7 +24,8 @@ export const ScreenBattleProcess = () => {
         getBattleById(params.id)
         .then((r) => {
             setBattle(r.data)
-            console.log(r.data)
+            setTimer1(r.data.participant_1_timer)
+            setTimer2(r.data.participant_2_timer)
         })
         .catch((e) => {
             console.log(e)
