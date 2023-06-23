@@ -35,16 +35,16 @@ export const Table = (props) => {
                     console.log(e)
                     if (e.response.status === 401 || e.response.status === 403) navigate("/")
                 })
-            setInterval(() => {
-                getBattlesEvent()
-                .then((r) => {
-                    setEvent(r.data)
-                    console.log(r.data)
-                })
-                .catch((e) => {
-                    console.log(e)
-                })
-            }, 15000);
+            // setInterval(() => {
+            //     getBattlesEvent()
+            //     .then((r) => {
+            //         setEvent(r.data)
+            //         console.log(r.data)
+            //     })
+            //     .catch((e) => {
+            //         console.log(e)
+            //     })
+            // }, 15000);
     }, [])
 
     
