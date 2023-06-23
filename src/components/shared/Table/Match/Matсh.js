@@ -40,10 +40,13 @@ export const Match = (props) => {
 
     const onClickResetPointsAndTime = (e) => {
         setOpen(!open)
-        console.log(timer1)
-        console.log(props.match.participant_1._id)
-        console.log(timer2)
-        console.log(props.match.participant_2._id)
+        if (props.match) {
+            console.log(timer1)
+            console.log(props.match.participant_1._id)
+            console.log(timer2)
+            console.log(props.match.participant_2._id)
+        }
+      
     }
 
    
@@ -92,14 +95,14 @@ export const Match = (props) => {
 
                                             <div className="window__columns column-wind">
                                                 <div className="column-wind__left">
-                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_1.nickName ? props.match.participant_1.nickName : null}</h2>
+                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_1 ? props.match.participant_1.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer1} onChange={(event) => handleTimerChange(event, 1)} tabIndex="1"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="column-wind__right">
-                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_2.nickName ? props.match.participant_2.nickName : null}</h2>
+                                                    <h2 className="column-wind__nick">{props.match && props.match.participant_2 ? props.match.participant_2.nickName : null}</h2>
                                                     <div className="column-wind__input">
                                                         <input type="text" value={timer2} onChange={(event) => handleTimerChange(event, 2)} tabIndex="2" />
                                                     </div>
