@@ -79,7 +79,7 @@ export const Match = (props) => {
                                         <span className="top-line__name">{props.match && props.match.participant_1.nickName ? props.match.participant_1.nickName : null}</span>
                                         <div className="top-line__count">
                                             <input className="top-line__number"  type="number" value={props.match ? props.match.participant_1_total_score : 0} disabled={true} />
-                                            <button className="top-line__img" hidden={!isAdmin}  id={props.match && props.match.participant_1._id ? props.match.participant_1._id : null} onClick={onClickMakeWinnerHandler}></button>
+                                            <div className="top-line__img" hidden={!isAdmin}  id={props.match && props.match.participant_1._id ? props.match.participant_1._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
                                     </div>
 
@@ -88,7 +88,7 @@ export const Match = (props) => {
 
                                         <div className="top-line__count">
                                             <input className="top-line__number" type="number" value={props.match ? props.match.participant_2_total_score : 0}  disabled={true} />
-                                            <button className="top-line__img" hidden={!isAdmin} id={props.match && props.match.participant_2._id ? props.match.participant_2._id : null} onClick={onClickMakeWinnerHandler}></button>
+                                            <div className="top-line__img" hidden={!isAdmin} id={props.match && props.match.participant_2._id ? props.match.participant_2._id : null} onClick={onClickMakeWinnerHandler}></div>
                                         </div>
 
                                     </div>

@@ -222,7 +222,6 @@
 
 .top-line__count {
   display: flex;
-  align-items: center;
   row-gap: 10px;
   align-self: flex-start;
 }
@@ -247,8 +246,7 @@
 }
 
 .top-line__img {
-  background: url(../style/win.png) 0 0 no-repeat;
-  background-size: contain;
+  background: url(../style/material-symbols_edit.svg) 0 0 no-repeat;
   width: 17px;
   height: 17px;
 }

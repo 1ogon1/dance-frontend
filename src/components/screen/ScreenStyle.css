@@ -124,11 +124,11 @@ text-align: center;
 }
 
 .content__column-stop {
-   color: #fff !important;
+  
 }
 
 .content__column-go {
-color: #fff !important;
+
 }
 .content__column-go.btn.btn--orange{
 max-width: 287px;
@@ -144,7 +144,7 @@ max-width: 287px;
 }
 
 .timer__btn {
-   color: #fff !important;
+
 }
 
  @media (max-height: 850px)  {
