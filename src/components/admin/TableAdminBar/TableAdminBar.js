@@ -56,7 +56,7 @@ export const TableAdminBar = (props) => {
 
                <div className="sidebar__box">
                   <div className="sidebar__list" >{e.nickName}</div>
-                  <button className="sidebar__img" id={e._id} onClick={onClickHandler} style={e.phoenix_power === true ? null : { filter: "blur(3px)" }} disabled={e.phoenix_power ? false : true}> </button>
+                  <button className="sidebar__img" id={e._id} onClick={onClickHandler} style={e.phoenix_power === true ? null : { filter: "blur(3px)" }} > </button>
 
                </div>
                   
