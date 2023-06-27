@@ -99,3 +99,13 @@ export const resetBattle = async (values, battleId) => {
   };
   return await axios.post(`${baseUrl}/battles/reset/` + battleId, JSON.stringify(values), options)
 }
+
+export const getUsersByRole = async (role) => {
+  const options = {
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  return await axios.get(`${baseUrl}/users/role/${role}`, options)
+}
