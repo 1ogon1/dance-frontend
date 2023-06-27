@@ -27,19 +27,34 @@ export const ScreenBattleResult = () => {
         if (e.response.status === 401 || e.response.status === 403) navigate("/")
         console.log(e)
       })
-
-    getUsersByRole("judge")
-    .then((r) => {
-      setJudges(r.data)
-      console.log(r.data)
-    })
-    .catch((e) => {
-      if (e.response.status === 401 || e.response.status === 403) navigate("/")
-      console.log(e)
-    })
   }, [])
 
+//
+  //sorting
+  if (battle.participant_1_score) {
+    battle.participant_1_score.sort(function (a, b) {
+      if (a.judge < b.judge) {
+        return -1;
+      }
+      if (a.judge > b.judge) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
+  if (battle.participant_2_score) {
+    battle.participant_2_score.sort(function (a, b) {
+      if (a.judge < b.judge) {
+        return -1;
+      }
+      if (a.judge > b.judge) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  
   return (
     <div className="result bg">
       <div className="result__container">
