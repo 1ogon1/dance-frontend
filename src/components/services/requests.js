@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseUrl = "http://localhost:8800/api"
+const baseUrl = "https://web-production-38ca.up.railway.app/api"
 
 export const postUserLogin = (values) => {
     const options = {
@@ -100,12 +100,4 @@ export const resetBattle = async (values, battleId) => {
   return await axios.post(`${baseUrl}/battles/reset/` + battleId, JSON.stringify(values), options)
 }
 
-export const getUsersByRole = async (role) => {
-  const options = {
-    headers: {
-      'Authorization' : `Bearer ${localStorage.getItem('Bearer')}`,
-      'Content-Type': 'application/json',
-    },
-  };
-  return await axios.get(`${baseUrl}/users/role/${role}`, options)
-}
+
