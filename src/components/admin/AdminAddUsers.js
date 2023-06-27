@@ -44,8 +44,9 @@ export const AdminAddUsers = () => {
             console.log(r)
         })
         .catch((e) => {
-            if (e.response.status === 401 || e.response.status === 403) navigate("/")
+            if (e.response.status === 401) navigate("/")
             console.log(e)
+            if (e.response.status === 403) navigate(`/admin/table`)
         })
     };
 

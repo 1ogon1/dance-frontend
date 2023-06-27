@@ -67,7 +67,7 @@ export const phoenixPower = async (participantId) => {
       'Content-Type': 'application/json',
     },
   };
-  return await axios.post(`${baseUrl}/battles/activatePhoenix/` + JSON.parse(participantId), options, options)
+  return await axios.post(`${baseUrl}/battles/phoenixPower/` + JSON.parse(participantId), options, options)
 }
 
 export const getBattlesEvent =async () => {
@@ -99,3 +99,5 @@ export const resetBattle = async (values, battleId) => {
   };
   return await axios.post(`${baseUrl}/battles/reset/` + battleId, JSON.stringify(values), options)
 }
+
+

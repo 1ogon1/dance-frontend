@@ -29,7 +29,7 @@ a:hover {
  }
 
  button{
-   cursor: pointer;
+   /* cursor: pointer; */
    color: inherit;
    background-color: inherit;
  }

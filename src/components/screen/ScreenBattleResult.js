@@ -3,13 +3,14 @@ import "components/screen/ScreenResult.css";
 import "components/style/reset.css";
 import "components/style/common.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBattleById } from "components/services/requests";
+import { getBattleById, getUsersByRole } from "components/services/requests";
 
 export const ScreenBattleResult = () => {
   const navigate = useNavigate()
 
   const [battle, setBattle] = useState({})
- 
+  const [judges, setJudges] = useState(null)
+
   const params = useParams()
 
   const onClickHandler = () => {
@@ -28,6 +29,32 @@ export const ScreenBattleResult = () => {
       })
   }, [])
 
+//
+  //sorting
+  if (battle.participant_1_score) {
+    battle.participant_1_score.sort(function (a, b) {
+      if (a.judge < b.judge) {
+        return -1;
+      }
+      if (a.judge > b.judge) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  if (battle.participant_2_score) {
+    battle.participant_2_score.sort(function (a, b) {
+      if (a.judge < b.judge) {
+        return -1;
+      }
+      if (a.judge > b.judge) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  
   return (
     <div className="result bg">
       <div className="result__container">
@@ -55,35 +82,38 @@ export const ScreenBattleResult = () => {
           <div className="section__info info">
 
             {/* -----------Отдельный ряд Судья и Балы--------- */}
-            <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[0] ? battle.participant_1_score[0].judge: "none"} </div>
+            {
+              battle.participant_1_score && battle.participant_1_score.length
+              ?
+              battle.participant_1_score.map((element) => {
+                return (
+                <div className="info__block block-info">
+              <div className="block-info__judge"> {element.judge} </div>
               <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[0]? battle.participant_1_score[0].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[0]? battle.participant_1_score[0].technique: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[0]? battle.participant_1_score[0].originality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[0]? battle.participant_1_score[0].filing: null}</div>
+                <div className="info-row__score">{element.musicality}</div>
+                <div className="info-row__score">{element.technique}</div>
+                <div className="info-row__score">{element.originality}</div>
+                <div className="info-row__score">{element.filing}</div>
               </div>
             </div>
+                )
+              })
+              :
+              <div className="info__block block-info">
+              <div className="block-info__judge"> {"none"} </div>
+              <div className="block-info__score">
+                <div className="info-row__score">{null}</div>
+                <div className="info-row__score">{ null}</div>
+                <div className="info-row__score">{ null}</div>
+                <div className="info-row__score">{ null}</div>
+              </div>
+            </div>
+            }
+           
 
-            <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[1] ? battle.participant_1_score[1].judge: "none"} </div>
-              <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length  && battle.participant_1_score[1] ? battle.participant_1_score[1].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[1] ? battle.participant_1_score[1].technique: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[1] ? battle.participant_1_score[1].originality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[1] ? battle.participant_1_score[1].filing: null}</div>
-              </div>
-            </div>
+        
 
-            <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_1_score  && battle.participant_1_score.length && battle.participant_1_score[2] ? battle.participant_1_score[2].judge: "none"} </div>
-              <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[2] ? battle.participant_1_score[2].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[2] ? battle.participant_1_score[2].technique: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[2] ? battle.participant_1_score[2].originality: null}</div>
-                <div className="info-row__score">{battle.participant_1_score && battle.participant_1_score.length && battle.participant_1_score[2] ? battle.participant_1_score[2].filing: null}</div>
-              </div>
-            </div>
+          
             {/* -----------Отдельный ряд Судья и Балы(end)--------- */}
 
           </div>
@@ -106,35 +136,33 @@ export const ScreenBattleResult = () => {
             <div className="section__info info">
 
               {/* -----------Отдельный ряд Судья и Балы--------- */}
+              {
+              battle.participant_2_score && battle.participant_2_score.length
+              ?
+              battle.participant_2_score.map((element) => {
+                return (
+                <div className="info__block block-info">
+              <div className="block-info__judge"> {element.judge} </div>
+              <div className="block-info__score">
+                <div className="info-row__score">{element.musicality}</div>
+                <div className="info-row__score">{element.technique}</div>
+                <div className="info-row__score">{element.originality}</div>
+                <div className="info-row__score">{element.filing}</div>
+              </div>
+            </div>
+                )
+              })
+              :
               <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[0] ? battle.participant_2_score[0].judge: "none"} </div>
+              <div className="block-info__judge"> {"none"} </div>
               <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[0]? battle.participant_2_score[0].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[0]? battle.participant_2_score[0].technique: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[0]? battle.participant_2_score[0].originality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[0]? battle.participant_2_score[0].filing: null}</div>
+                <div className="info-row__score">{null}</div>
+                <div className="info-row__score">{ null}</div>
+                <div className="info-row__score">{ null}</div>
+                <div className="info-row__score">{ null}</div>
               </div>
             </div>
-
-            <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[1] ? battle.participant_2_score[1].judge: "none"} </div>
-              <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[1]? battle.participant_2_score[1].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[1]? battle.participant_2_score[1].technique: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[1]? battle.participant_2_score[1].originality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[1]? battle.participant_2_score[1].filing: null}</div>
-              </div>
-            </div>
-
-            <div className="info__block block-info">
-              <div className="block-info__judge"> {battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[2] ? battle.participant_2_score[2].judge: "none"} </div>
-              <div className="block-info__score">
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[2]? battle.participant_2_score[2].musicality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[2]? battle.participant_2_score[2].technique: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[2]? battle.participant_2_score[2].originality: null}</div>
-                <div className="info-row__score">{battle.participant_2_score  && battle.participant_2_score.length && battle.participant_2_score[2]? battle.participant_2_score[2].filing: null}</div>
-              </div>
-            </div>
+            }
               {/* -----------Отдельный ряд Судья и Балы(end)--------- */}
 
             </div>
