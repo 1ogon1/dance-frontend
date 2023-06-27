@@ -1,3 +1,6 @@
+body, input, button, a, label{
+   cursor: url(../../style/cursor.png), auto!important; 
+}
 /* ---------BUTTON------ */
 .btn {
    /* width: 100%; */
