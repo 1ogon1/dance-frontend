@@ -250,7 +250,14 @@
   background: url(../style/win.png) 0 0 no-repeat;
   background-size: contain;
   width: 17px;
-  height: 17px;
+  height: 15px;
+  transition: transform 0.3s ease-in-out 0s;
+}
+.top-line__img:hover{
+  transform:scale(1.2);
+}
+.top-line__img:active{
+  transform:scale(1);
 }
 
 .battle-block__btn {
