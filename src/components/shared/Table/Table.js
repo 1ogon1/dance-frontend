@@ -18,6 +18,7 @@ export const Table = (props) => {
     const [event, setEvent] = useState({});
     const navigate = useNavigate()
     const [data, setData] = useState(Object.is(event, {}) ? null : event)
+
     useEffect(() => {
 
         let cachedData = localStorage.getItem('cachedData')
@@ -36,7 +37,8 @@ export const Table = (props) => {
                     if (e.response.status === 401 || e.response.status === 403) navigate("/")
                 })
         //interval for requests
-            setInterval(() => {
+        
+            const id = setInterval(() => {
                 getBattlesEvent()
                 .then((r) => {
                     setEvent(r.data)
@@ -47,6 +49,11 @@ export const Table = (props) => {
                 })
             }, 5000);
         //
+
+
+        return () => {
+            clearInterval(id)
+        }
     }, [])
 
     
