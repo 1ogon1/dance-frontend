@@ -115,7 +115,7 @@ export const JudgeBattle = () => {
                         </div>
                         <div className="header-battle__right header-right">
                             <div className="header-right__judge header-title">judge</div>
-                            <div className="header-right__nomination header-bottom">{judge.name ? judge.name : null}</div>
+                            <div className="header-right__nomination header-bottom">{judge.nickName ? judge.nickName : null}</div>
                         </div>
                     </div>
                     <div className="header-battle__number-battle">Battle</div>
