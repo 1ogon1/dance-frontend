@@ -1,0 +1,13 @@
+.container {
+
+    padding-left: 15vw;
+    height: 100vh;
+    padding-right: 15vw;
+}
+
+.small-container {
+    /* padding-left: 5vw; */
+    padding-right: 5vw;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
