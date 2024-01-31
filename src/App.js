@@ -1,14 +1,14 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { Login } from './components/auth/Login';
 import { JudgePage } from './components/judge/JudgePage'
-import { AdminAddUsers } from 'components/admin/AdminAddUsers';
-import { AdminPage } from 'components/admin/AdminPage';
-import { JudgeBattle } from 'components/judge/JudgeBattle';
-import { ScreenBattleProcess } from 'components/screen/ScreenBattleProcess';
-import { ScreenBattleResult } from 'components/screen/ScreenBattleResult';
-import { ScreenPage } from 'components/screen/ScreenPage';
+import { AdminAddUsers } from './components/admin/AdminAddUsers';
+import { AdminPage } from './components/admin/AdminPage';
+import { JudgeBattle } from './components/judge/JudgeBattle';
+import { ScreenBattleProcess } from './components/screen/ScreenBattleProcess';
+import { ScreenBattleResult } from './components/screen/ScreenBattleResult';
+import { ScreenPage } from './components/screen/ScreenPage';
 import React from 'react';
-import { TablePage } from 'components/shared/Table/TablePage';
+import { TablePage } from './components/shared/Table/TablePage';
 function App() {
   return (
 

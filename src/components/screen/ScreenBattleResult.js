@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "components/screen/ScreenResult.css";
-import "components/style/reset.css";
-import "components/style/common.css";
+import "../../components/screen/ScreenResult.css";
+import "../../components/style/reset.css";
+import "../../components/style/common.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBattleById, getUsersByRole } from "components/services/requests";
+import { getBattleById } from "../../components/services/requests";
 
 export const ScreenBattleResult = () => {
   const navigate = useNavigate()

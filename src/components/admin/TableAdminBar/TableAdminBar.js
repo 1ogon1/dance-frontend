@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./TableAdminBar.css"
-import { getParticipants, phoenixPower } from "components/services/requests";
+import { getParticipants, phoenixPower } from "../../../components/services/requests";
 import { useNavigate } from "react-router-dom";
 export const TableAdminBar = (props) => {
    const [participants, setParticipants] = useState([]);

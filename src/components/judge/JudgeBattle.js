@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import 'components/style/common.css';
-import 'components/style/rest.css';
-import 'components/judge/JudgeBattleCSS/style.css';
-import { checkRole, getBattleById, vote } from 'components/services/requests';
+import '../../components/style/common.css';
+import '../../components/style/rest.css';
+import '../../components/judge/JudgeBattleCSS/style.css';
+import { checkRole, getBattleById, vote } from '../../components/services/requests';
 import { useEffect } from 'react';
 export const JudgeBattle = () => {
     const [battle, setBattle] = useState({})

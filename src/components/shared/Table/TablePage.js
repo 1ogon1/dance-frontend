@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Table } from "./Table"
-import { TableAdminBar } from "components/admin/TableAdminBar/TableAdminBar";
+import { TableAdminBar } from "../../../components/admin/TableAdminBar/TableAdminBar";
 import { users } from "./mock-data";
 export const TablePage = () => {
     //if screen => use different paddings(or container)

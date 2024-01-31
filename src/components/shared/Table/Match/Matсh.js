@@ -1,5 +1,5 @@
-import { hmsToSecondsOnly, secondsToHMS } from "components/services/helper";
-import { resetBattle, setWinner } from "components/services/requests";
+import { hmsToSecondsOnly, secondsToHMS } from "../../../../components/services/helper";
+import { resetBattle, setWinner } from "../../../../components/services/requests";
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup"

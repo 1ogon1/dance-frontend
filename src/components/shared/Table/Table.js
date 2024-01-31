@@ -7,7 +7,7 @@ import { Match } from './Match/Matсh';
 // --------swiper---------
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { getBattlesEvent } from 'components/services/requests';
+import { getBattlesEvent } from '../../../components/services/requests';
 import { useNavigate } from 'react-router-dom';
 // --------swiper(END)---------
 
