@@ -1,5 +1,8 @@
-### `npm i` - install dependencies
-### `npm start` - run application
+## App
+- `npm i` - install dependencies
+- set backend url in `/src/components/services/request.js`
+- `npm start` - run application
 
-
-https://fastidious-manatee-a008cc.netlify.app/
+## Deployment 
+- Last deployment on branch: netlify/action
+- Service: https://www.netlsify.com/
