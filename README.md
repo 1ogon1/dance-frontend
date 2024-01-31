@@ -5,4 +5,4 @@
 
 ## Deployment 
 - Last deployment on branch: netlify/action
-- Service: [https://www.netlsify.com/](https://www.netlify.com/)https://www.netlify.com/
+- Service: https://www.netlify.com/
