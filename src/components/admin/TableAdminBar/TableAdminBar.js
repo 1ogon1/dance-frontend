@@ -49,19 +49,20 @@ export const TableAdminBar = (props) => {
             <div className="sidebar__logo"></div>
             <h2 className="sidebar__title">Top 16</h2>
             {participants.map((e, key) => 
-            {
-               if (key > 15) return null;
-               return (
-            <>{
+               {
+                  if (key > 15) return null;
+                  return (
+                     <>
+                        {
 
-               <div className="sidebar__box">
-                  <div className="sidebar__list" >{e.nickName}</div>
-                  <button className="sidebar__img" id={e._id} onClick={onClickHandler} style={e.phoenix_power === true ? null : { filter: "blur(3px)" }} > </button>
-
-               </div>
-                  
-            }</>)
-            }
+                           <div className="sidebar__box">
+                              <div className="sidebar__list" >{e.nickName}</div>
+                              <button className="sidebar__img" id={e._id} onClick={onClickHandler} style={e.phoenix_power === true ? null : { filter: "blur(3px)" }} > </button>
+                           </div>
+                        }
+                     </>
+                  )
+               }
             )}
 
             {/* <div className="sidebar__btn btn btn--orange">randomize</div> */}

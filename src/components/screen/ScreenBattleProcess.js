@@ -135,13 +135,18 @@ export const ScreenBattleProcess = () => {
         navigate(`../result/${params.id}`)
     }
 
+    let finalText = 'FINAL';
+    if (battle.stage === 'FINAL') {
+        finalText = ''
+    }
+
     return (
         <div className='timer bg' >
             <div className="timer__container ">
 
                 <div className='timer__header header-timer'>
                      <div className='header-timer__logo'> </div>
-                     <div className='header-timer__final'>{battle ? battle.stage : null}</div>
+                     <div className='header-timer__final'>{battle ? battle.stage : null} {finalText}</div>
                 </div>
                 <div className='timer__content content'>
 

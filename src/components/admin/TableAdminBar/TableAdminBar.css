@@ -1,5 +1,4 @@
 /* =======RESET======= */
-
 *,
 *::before,
 *::after {
@@ -46,7 +45,6 @@ textarea {
 
 input {
     width: 100%;
-
 }
 
 h1,
@@ -75,24 +73,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    
     padding-top: 40px;
     padding-bottom: 135px;
     background-color: #000;
 }
 
 .sidebar__container {
-max-width: 250px;
-margin: 0 auto;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 .sidebar__logo {
-    background: url(../../style/logo-small.png) 0 0 no-repeat;
-    width: 75px;
-    height: 75px;
+    background: url(../../style/91logo.png) 0 0 no-repeat;
+    width: 91px;
+    height: 91px;
     margin: 0 auto;
     margin-bottom: 24px;
-
 }
 
 .sidebar__title {
@@ -106,8 +102,6 @@ margin: 0 auto;
 
 .sidebar__list {
     display: flex;
-   
-    /* text-align: left; */
     color: #fff;
     width: 130px;
     margin: 0 auto 15px;
@@ -117,26 +111,24 @@ margin: 0 auto;
     letter-spacing: 0.04em;
     position: relative;
     word-break: break-all;
-
 }
 
 .sidebar__img{
     background: url(../../style/phoenix-btn.png) 0 0 no-repeat;
-width: 33px;
-height: 28px;
-transition: all 0.3s ease 0s;
+    width: 33px;
+    height: 28px;
+    transition: all 0.3s ease 0s;
 }
 
 .sidebar__box{
     display: flex;
-    
 }
 
 .sidebar__img:hover{
-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .sidebar__img:active{
-transform: scale(0.9);
+    transform: scale(0.9);
 }
 
 .sidebar__btn {

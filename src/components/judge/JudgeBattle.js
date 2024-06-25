@@ -111,14 +111,14 @@ export const JudgeBattle = () => {
                     <div className="header-battle__info">
                         <div className="header-battle__left header-left">
                             <div className="header-left__round header-title">Round</div>
-                            <div className="header-left__nomination header-bottom">{battle.stage ? battle.stage : null}</div>
+                            <div className="header-left__nomination header-bottom">Hip-Hop Pro {battle.stage ? battle.stage : null} final</div>
                         </div>
                         <div className="header-battle__right header-right">
                             <div className="header-right__judge header-title">judge</div>
                             <div className="header-right__nomination header-bottom">{judge.nickName ? judge.nickName : null}</div>
                         </div>
                     </div>
-                    <div className="header-battle__number-battle">Battle</div>
+                    <div className="header-battle__number-battle">BATTLE</div>
                     <div className="header-battle__participant participant">
 
                         <div className="participant__name">{battle.participant_1 ? battle.participant_1.nickName : null}</div>

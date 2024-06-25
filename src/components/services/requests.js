@@ -1,5 +1,6 @@
 import axios from "axios"
-const baseUrl = "https://web-production-38ca.up.railway.app/api"
+// const baseUrl = "https://web-production-38ca.up.railway.app/api"
+const baseUrl = "http://localhost:3000/api"
 
 export const postUserLogin = (values) => {
     const options = {
