@@ -55,16 +55,23 @@ export const Table = (props) => {
         }
     }, [])
 
-    
+    let className = 'table__judge';
+    if (role === 'SCREEN') {
+        className = 'table'
+    }
 
     return (
-        <div className="table bgg">
+        <div className={className}>
             <div className="table__container">
-                <h1 className="table__title">Battles</h1>
+                <div className='table__header'>
+                    <div className="table__header-battle__logo"></div>
+                    <h1 className="table__title">Battles</h1>
+                </div>
+
                 {isJudge ?
                     <Swiper
                         spaceBetween={10}
-                        slidesPerView={2}
+                        slidesPerView={2.7}
                         slidesPerGroup={2}
                         className="table__main main-table">
                         {/* ===========================КОЛОНКА-1============================= */}
@@ -203,9 +210,9 @@ export const Table = (props) => {
                         </div>
                         {/* ===========================КОЛОНКА-2(END)============================= */}
 
-                        <div className="main-table__column  column--connect">
+                        <div className="main-table__column  column--connect2">
                             <div className="column__line line--midle"></div>
-                            <div className="column__line line--midle"></div>
+                            <div className="column__line line--midle1"></div>
                         </div>
 
                         {/* ===========================КОЛОНКА-3============================= */}

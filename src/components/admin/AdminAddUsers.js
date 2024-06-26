@@ -51,7 +51,7 @@ export const AdminAddUsers = () => {
     };
 
     return (
-        <div className="admin-top bg">
+        <div className="admin-top">
             <Container>
                 <div className="admin-top__container">
                     <h1 className="title">Top 16</h1>
@@ -105,3 +105,7 @@ export const AdminAddUsers = () => {
         </div>
     );
 };
+
+
+
+

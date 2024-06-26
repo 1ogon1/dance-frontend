@@ -1,13 +1,12 @@
 .admin-top{
-   background:  linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%);
+   /* background:  linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%); */
+   background: linear-gradient(160.42deg, #000000 26.6%, #200D01 34.86%, #411A02 43.2%, #823303 55.64%, #D24F00 68.9%, #F85E01 82.8%);
    height: 100vh;
-
    display: flex;
    justify-content: center;
    align-items: center;
-overflow: hidden;
-
-position: relative;
+   overflow: hidden;
+   position: relative;
 }
 
 .admin-top__container{
@@ -16,10 +15,7 @@ position: relative;
    align-items: center;
    position: relative;
    z-index: 3;
-/* 
-
-   padding-top: 180px;
-   padding-bottom: 180px; */
+   
 }
 
 
@@ -37,54 +33,27 @@ position: relative;
    display: flex;
    column-gap: 90px;
    margin-bottom: 32px;
-
 }
 
-
-
-
-.admin-top__column{
- 
-}
-
-
-
-.top-column{
-
- 
-}
-
-.top-column__block{
-
-}
 .top-column__block:not(:last-child){
-margin-bottom: 16px;
+   margin-bottom: 16px;
 }
 
-.top-column__title{
-
-}
-
-.top-column__input{
-}
 .top-column__input::placeholder{
    display: none;
 }
 
-
 .admin-top__btn {
-max-width:300px ;
-
+   max-width:300px ;
 }
 
 .admin-top__logo{
-
    position: absolute;
-   top: 3%;
-   left: 3%;
-   width: 75px;
-   height: 75px;
-   background: url(../style/logo-small.png) no-repeat;
+   top: 5%;
+   left: 5%;
+   width: 91px;
+   height: 91px;
+   background: url(../style/91logo.png) no-repeat;
    background-size: cover;
 }
 
@@ -95,8 +64,6 @@ max-width:300px ;
       flex-wrap: wrap;
       justify-content: center;
    }
-  
-
  }
 
  @media (max-width: 1024px){
@@ -113,8 +80,4 @@ max-width:300px ;
       padding-bottom: 50px;
       height: auto;
    }
-   .bg::before{
-      display: none;
-   }
   }
-

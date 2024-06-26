@@ -47,7 +47,7 @@ export const Login = () => {
     };
 
     return (
-        <div className="auth bg">
+        <div className="auth">
                 <div className="auth__main">
                     <div className="auth__logo">
                 

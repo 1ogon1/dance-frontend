@@ -5,7 +5,9 @@
     padding-left: 15px;
 
 
-    background:  linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%);
+    /* background:  linear-gradient(167.95deg, #000000 11%, #823303 36.64%, #D24F00 58.3%, #F85E01 85.83%); */
+    background: linear-gradient(160.42deg, #000000 26.6%, #200D01 34.86%, #411A02 43.2%, #823303 55.64%, #D24F00 68.9%, #F85E01 82.8%);
+
     height: 100vh;
     /* width: 100vw; */
     display: flex;
@@ -13,34 +15,9 @@
     align-items: center;
 
 
-overflow: hidden;
+    overflow: hidden;
     position: relative;
 }
-
-
-.bg{
-
-}
-
-.bg::before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 20%;
- 
-    background: url(./decor-auth.svg) 0 0 / 100% no-repeat;
-        background-size: cover;
-    background-position: center right;
-    pointer-events: none;
- 
-    
- }
-
-
-
-
 
 /* ================================== */
 .auth__main {
@@ -49,7 +26,7 @@ overflow: hidden;
     flex-direction: column;
     row-gap: 65px;
     align-items: center;
-    /* width: 100%; */
+    max-width: 300px;
 
     position: relative;
     z-index: 2;
@@ -64,7 +41,7 @@ overflow: hidden;
     width: 208px;
     height: 208px;
     background-color: #fdb735;
-    background: url(./logo.png)  no-repeat;
+    background: url(./newlogo.png) no-repeat;
     background-size: contain;
 
     
@@ -94,6 +71,7 @@ overflow: hidden;
 .auth__form-title {
     display: inline-block;
     margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .auth__form input {
@@ -117,6 +95,7 @@ overflow: hidden;
     border-radius: 24px;
     padding: 10px;
     color: #F75E01;
+
     font-weight: 800;
     font-size: 20px;
     line-height: 24px;
@@ -135,21 +114,36 @@ overflow: hidden;
 .auth__form-btn:active{
     transform: scale(0.97);
     opacity: 0.9;
+
 }
 
 
 @media (max-height: 500px)  { 
-    .auth{
-      padding-top: 300px;
-      padding-bottom: 70px;
-  overflow: scroll;  }
-  
-  .bg::before{
-      height: 170%;
-  
-  }
+        .auth {
+            padding-top: 300px;
+            padding-bottom: 70px;
+            overflow: scroll;  
+        }
+
+        .bg::before {
+            height: 170%;
+        
+        }
    }
 
+   @media (max-width: 640px) {
+    .auth {
+        background: black;
+    }
+    .auth__form label {
+        width: 100%;
+    }
+
+    .auth__form-btn {
+        background: #F75E01;
+        color: black;
+    }
+   }
    *,
 *::before,
 *::after {

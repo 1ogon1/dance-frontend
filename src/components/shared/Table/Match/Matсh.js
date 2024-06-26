@@ -66,7 +66,7 @@ export const Match = (props) => {
    
     return (
         <div className="block-column__item">
-                                <div className="battle-block__top top-block" onClick={()=> 
+                                <div className="battle-block__top" onClick={()=> 
                                 {
                                     if (props.role === "JUDGE" && props.match !== null)
                                      navigate(`../..//judge/battle/${props.match._id}`)
