@@ -56,7 +56,7 @@ export const ScreenBattleResult = () => {
   }
   
   return (
-    <div className="result">
+    <div className="result bg">
       <div className="result__container">
 
         {/* =============================Header=================================== */}
@@ -66,9 +66,9 @@ export const ScreenBattleResult = () => {
             <div className="midle-block__nickname nickname">{battle.participant_1 ? battle.participant_1.nickName : null}</div>
             <div className="midle-block__row info-row">
               <div className="info-row__judge">Музикальність</div>
-              <div className="info-row__judge">Техніка</div>
-              <div className="info-row__judge_original">Оригінальність</div>
-              <div className="info-row__judge_last">Подача</div>
+              <div className="info-row__judge">Характер і Подача</div>
+              <div className="info-row__judge_original">Техніка</div>
+              <div className="info-row__judge_last">Оригінальність</div>
             </div>
           </div>
           <button className="header__btn btn btn--orange" onClick={onClickHandler}>BACK TO BATTLES</button>
