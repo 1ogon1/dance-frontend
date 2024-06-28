@@ -12,6 +12,19 @@
    position: relative;
 }
 
+.timer.bg::before {
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   /* bottom: 5%; */
+   /* left: 30%; */
+   background: url(../style/wave.png) no-repeat;
+   background-size: 100%;
+   background-position: center;
+   pointer-events: none;
+ }
+
 /* КОНТЕЙНЕР */
 .timer__container {
    padding: 25px 15px 30px;
