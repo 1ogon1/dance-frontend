@@ -57,7 +57,7 @@ export const Table = (props) => {
 
     let className = 'table__judge';
     if (role === 'SCREEN') {
-        className = 'table'
+        className = 'table bgg'
     }
 
     return (

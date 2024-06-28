@@ -169,7 +169,7 @@ export const JudgeBattle = () => {
                             <div className="thumb"></div>
                         </div>
                     </div>
-                    <div className="main-battle__technique battle-top">Техніка</div>
+                    <div className="main-battle__technique battle-top">Характер і Подача</div>
                     <div className="main-battle__slider slider">
                         <div className="slider__box slider--left">
                             <input
@@ -210,7 +210,7 @@ export const JudgeBattle = () => {
                             <div className="thumb"></div>
                         </div>
                     </div>
-                    <div className="main-battle__originality battle-top">Оригінальність</div>
+                    <div className="main-battle__originality battle-top">Техніка</div>
                     <div className="main-battle__slider slider">
                         <div className="slider__box slider--left">
                             <input
@@ -251,7 +251,7 @@ export const JudgeBattle = () => {
                             <div className="thumb"></div>
                         </div>
                     </div>
-                    <div className="main-battle__filling battle-top">Подача</div>
+                    <div className="main-battle__filling battle-top">Оригінальність</div>
                     <div className="main-battle__slider slider">
                         <div className="slider__box slider--left">
                             <input
